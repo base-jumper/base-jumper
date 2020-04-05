@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Terminal
+nav_order: 3
 ---
 
 # Terminal
@@ -18,19 +19,25 @@ title: Terminal
 ## Terminal Syntax
 The terminal supports a sub-set of the c++ syntax that you would normally use to write a complete program or sketch. At the terminal you can create handles to circuits and issue commands to circuits. 
 
-* syntax variations.
-
 ![Terminal example with full syntax]({{"assets/images/terminal/terminal_example_full_syntax.png" | relative_url}})
 
-The terminal will not evaluate arbitrary c or c++ expressions. Save the `if` statements, `for` loops, arithmetic, etc for your program, as they will not work at the terminal.
+The screenshot above demonstrates how to interact with a Led circuit through the terminal. The commands entered at the terminal similar to the equivalent c++ code, but there are a few differences which we will discuss below.
+
+####  No Semicolons
+At the terminal we don't need to terminate each line with `;`. The terminal accepts a single command on each line. As soon as you hit enter, the command is executed.
+
+#### Shortened arguments
+The second thing to note from the above example is argument passed to `set_state()`. In c++ code we would have used `Led::State_Blink`. Here we used just `blink`. The `Led::` scoping is dropped completely, and the `State_Blink` has been shortened to just `blink`.
+
+So if the arguments used at the terminal are different, how do you know what to use? The simplest way to find out is to use the `instuctions` command. When you call the `instructions` command on a circuit, it will print to the terminal all of the supported instructions. Along with each function it also shows the expected format of the arguments. For numeric arguments it will give an expected range.
+
+![Discover a circuits instructions]({{"assets/images/terminal/terminal_instructions.png | relative_url}})
+
+#### Limited functionality
+The terminal will not evaluate arbitrary c or c++ expressions. Save the `if` statements, `for` loops and arithmetic for your program or sketch.
 
 
-``` cpp
-my_led.set_blink_rate(1+1) // 1+1 is an expression. The terminal only accepts literals.
-```
-
-
-### Terminal Short-cuts
+## Terminal Short-cuts
 Compiled code must always strictly follow the syntax of the c++ programming language. If not, the compiler will grumble at us and refuse to generate the stream of 1s & 0s that make up our application. However, there are a few short-cuts we can take when working at the terminal. If you can remember these it will save you some key-stokes.
 
 #### Faster handles
