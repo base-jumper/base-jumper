@@ -26,8 +26,20 @@ void set(Led::State state)
 ## Example
 
 ``` cpp
+#include <BaseJumper.h>
+
+// create circut handle
 Led::Handle my_led(0);
-my_led.blink_period_set();
-my_led.set(Led::State_Blink); // led will start blinking green
+
+void setup() {  
+  basejumper_init();
+  my_led.create();  
+  my_led.state_set(Led::State_Blink); 
+}
+
+void loop() {
+  // We already set the led to blink in setup().
+  // Nothing to do here but kick back and relax.
+}
 
 ```

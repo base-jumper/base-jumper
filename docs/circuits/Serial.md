@@ -98,3 +98,5 @@ void write(uint8_t* p_source, size_t len)
 void clear()
 ```
 *Discards all data that is currently in the receive buffer. `available()` is reset to zero.*
+
+## Example
