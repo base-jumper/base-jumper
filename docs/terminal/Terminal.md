@@ -21,7 +21,7 @@ The terminal supports a sub-set of the c++ syntax that you would normally use to
 
 ![Terminal example with full syntax]({{"assets/images/terminal/terminal_example_full_syntax.png" | relative_url}})
 
-The screenshot above demonstrates how to interact with a Led circuit through the terminal. The commands entered at the terminal similar to the equivalent c++ code, but there are a few differences which we will discuss below.
+The screenshot above demonstrates how to interact with a Led circuit through the terminal. The commands entered at the terminal similar to the equivalent c++ code, but there are a few differences which are outlined below.
 
 ####  No Semicolons
 At the terminal we don't need to terminate each line with `;`. The terminal accepts a single command on each line. As soon as you hit enter, the command is executed.
