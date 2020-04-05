@@ -20,7 +20,7 @@ The terminal supports a sub-set of the c++ syntax that you would normally use to
 
 * syntax variations.
 
-![Terminal example - full syntax](assets/images/terminal/terminal_example_full_syntax.png)
+![Terminal example - full syntax]({{assets/images/terminal/terminal_example_full_syntax.png | relative_url}})
 
 The terminal will not evaluate arbitrary c or c++ expressions. Save the `if` statements, `for` loops, arithmetic, etc for your program, as they will not work at the terminal.
 

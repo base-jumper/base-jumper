@@ -25,7 +25,7 @@ description: >- # this means to ignore newlines until "baseurl:"
   Documentation for the BaseJumper base boards.
   BaseJumper base boards are cross-platform. 
   You can pair them with your favourite platform (Raspberry Pi, Arduino, etc) to build professional, industrial-strength control systems.
-#baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/base-jumper" # the subpath of your site, e.g. /blog
 #url: "http://wwww.basejumper.io" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: base-jumper
 github_username:  base-jumper
