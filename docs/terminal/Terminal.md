@@ -9,17 +9,17 @@ nav_order: 3
 ## Intro
 BaseJumper base boards have a serial terminal facility, which you can use to explore, configure, test and monitor your base board. 
 
-The terminal is a great place to start getting to know the base board's features. There are system commands you can run to display all of the available circuits, and list the instructions supported by each circuits. To quickly try something out a circuit you can issue a command to it directly from the terminal. Here's a sneak peak. 
+The terminal is a great place to start getting to know the base board's features. There are system commands you can run to display all of the available circuits and list the instructions supported by each circuit. To quickly try something out a circuit you can issue a command to it directly from the terminal. Here's a sneak peak. 
 
-!(Terminal sneak peak)[{{ "assets/images/terminal/terminal_intro" | relative_url}}]
+!(Terminal sneak peak)[{{"assets/images/terminal/terminal_intro.png" | relative_url}}]
 
 Don't worry if you don't understand the commands or syntax at this stage. It will be explained in the following sections.
 
-Other common uses for the terminal include configuring the board number (in systems with multiple boards), checking and clearing errors and checking API versions. Check out [System]({{"docs/circuits/System.html | relative_url}}) for other useful commands you can run at the terminal.
+Other common uses for the terminal include configuring the board number (in systems with multiple boards), checking and clearing errors and checking API versions. Check out [System]({{"docs/circuits/System.html | relative_url}}) for more commands.
 
 
 ## Getting Connected
-To connect to the serial terminal, you will need to plug your PC into the baseboard's USB connector. All baseboards have a USB connector, but you may need to remove the baseboard from its enclosure to access it. Once connected, the base board will appear as a virtual com port on your computer. Fire up your favourite terminal emulator, set it to serial, select the appropriate COM port and connect. It doesn't matter what baud rate you select - the default will be fine. Once connected you should see something like this.
+To open the serial terminal, you will need to connect a USB cable between your PC and the baseboard. All baseboards have a micro USB connector, but you may need to remove the baseboard from its enclosure to access it. Once connected, the base board will appear as a virtual com port on your computer. Fire up your favourite terminal emulator, set it to serial, select the appropriate COM port and connect. It doesn't matter what baud rate you select - the default will be fine. 
 
 
 ## Terminal Syntax
@@ -41,7 +41,6 @@ So if the arguments used at the terminal are different, how do you know what to 
 
 #### Limited functionality
 The terminal will not evaluate arbitrary c or c++ expressions. Save the `if` statements, `for` loops and arithmetic for your program or sketch.
-
 
 ## Terminal Short-cuts
 Compiled code must always strictly follow the syntax of the c++ programming language. If not, the compiler will grumble at us and refuse to generate the stream of 1s & 0s that make up our application. However, there are a few short-cuts we can take when working at the terminal. If you can remember these it will save you some key-stokes.
