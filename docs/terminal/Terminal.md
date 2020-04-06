@@ -95,8 +95,3 @@ If you issue a command without specifying a handle, it is assumed by default tha
 ``` cppp
 print_faults
 ```
-
-## Terminal Use Cases
-* Configuration
-* Exploring
-* Checking faults
