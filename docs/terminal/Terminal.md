@@ -7,31 +7,37 @@ nav_order: 3
 # Terminal
 
 ## Intro
-* test functionality
-* configuring the system
-* image
+BaseJumper base boards have a serial terminal facility, which you can use to explore, configure, test and monitor your base board. 
+
+The terminal is a great place to start getting to know the base board's features. There are system commands you can run to display all of the available circuits, and list the instructions supported by each circuits. To quickly try something out a circuit you can issue a command to it directly from the terminal. Here's a sneak peak. 
+
+!(Terminal sneak peak)[{{ "assets/images/terminal/terminal_intro" | relative_url}}]
+
+Don't worry if you don't understand the commands or syntax at this stage. It will be explained in the following sections.
+
+Other common uses for the terminal include configuring the board number (in systems with multiple boards), checking and clearing errors and checking API versions. Check out [System]({{"docs/circuits/System.html | relative_url}}) for other useful commands you can run at the terminal.
+
 
 ## Getting Connected
-* windows?
-* linux?
-* links?
+To connect to the serial terminal, you will need to plug your PC into the baseboard's USB connector. All baseboards have a USB connector, but you may need to remove the baseboard from its enclosure to access it. Once connected, the base board will appear as a virtual com port on your computer. Fire up your favourite terminal emulator, set it to serial, select the appropriate COM port and connect. It doesn't matter what baud rate you select - the default will be fine. Once connected you should see something like this.
+
 
 ## Terminal Syntax
 The terminal supports a sub-set of the c++ syntax that you would normally use to write a complete program or sketch. At the terminal you can create handles to circuits and issue commands to circuits. 
 
 ![Terminal example with full syntax]({{"assets/images/terminal/terminal_example_full_syntax.png" | relative_url}})
 
-The screenshot above demonstrates how to interact with a Led circuit through the terminal. The commands entered at the terminal similar to the equivalent c++ code, but there are a few differences which are outlined below.
+The screenshot above demonstrates how to interact with a Led circuit through the terminal. The commands entered at the terminal are similar to the equivalent c++ code, but there are a few differences which are outlined below.
 
 ####  No Semicolons
 At the terminal we don't need to terminate each line with `;`. The terminal accepts a single command on each line. As soon as you hit enter, the command is executed.
 
 #### Shortened arguments
-The second thing to note from the above example is argument passed to `set_state()`. In c++ code we would have used `Led::State_Blink`. Here we used just `blink`. The `Led::` scoping is dropped completely, and the `State_Blink` has been shortened to just `blink`.
+The second thing to note from the above example is the argument passed to `set_state()`. In code we would have used `Led::State_Blink`. At the terminal we use just `blink`. The `Led::` scoping is dropped completely, and the `State_Blink` has been shortened to just `blink`.
 
 So if the arguments used at the terminal are different, how do you know what to use? The simplest way to find out is to use the `instuctions` command. When you call the `instructions` command on a circuit, it will print to the terminal all of the supported instructions. Along with each function it also shows the expected format of the arguments. For numeric arguments it will give an expected range.
 
-![Discover a circuits instructions]({{"assets/images/terminal/terminal_instructions.png | relative_url}})
+![Discover a circuits instructions]({{"assets/images/terminal/terminal_instructions.png" | relative_url}})
 
 #### Limited functionality
 The terminal will not evaluate arbitrary c or c++ expressions. Save the `if` statements, `for` loops and arithmetic for your program or sketch.
@@ -43,11 +49,11 @@ Compiled code must always strictly follow the syntax of the c++ programming lang
 #### Faster handles
 When creating a handle, typing `::Handle` after the circuit type is optional. 
 
-*Complete Syntax*
+*Complete*
 ``` cpp
 Led::Handle my_led(0);
 ```
-*Equivalent Shortcut*
+*Shortcut*
 ``` cpp
 Led my_led(0);
 ```
