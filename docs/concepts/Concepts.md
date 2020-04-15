@@ -11,10 +11,10 @@ Before going any further, let's discuss some of the key concepts around BaseJump
 ## Platform
 *Arduino, Raspberry Pi, Raspberry Pi compute module, Jetson.* Hopefully you've already heard of one or more of these and have some idea of what they are. But what would you call them, collectively? Single board computers? No, not all of them. System on module? Sure, some are. But there's not really a name precisely captures them all. So, for better or worse, we've decided to call them **Platforms**. 
 
-![Arduino MKR]({{"assets/images/boards/arduino_mkr.jpg" | relative_url }})
-![Raspberry Pi 4]({{"assets/images/boards/rpi4.jpg" | relative_url }})
-![Raspberry Pi Compute]({{"assets/images/boards/rpi_compute.jpg" | relative_url }})
-![Nvidia Jetson Nano]({{"assets/images/boards/jetson_nano.jpg" | relative_url }})
+![Arduino MKR]({{"assets/images/boards/arduino_mkr_sml.jpg" | relative_url }})
+![Raspberry Pi 4]({{"assets/images/boards/rpi4_sml.jpg" | relative_url }})
+![Raspberry Pi Compute]({{"assets/images/boards/rpi_compute_sml.jpg" | relative_url }})
+![Nvidia Jetson Nano]({{"assets/images/boards/jetson_nano_sml.jpg" | relative_url }})
 
 ## Base Board
 *Shield, hat, cape, wing.* Familiar with any of these terms? They are all "add-on" boards of sorts, that plug in to a platform to extend its functionality. They provide additional circuits, such as sensor & actuator interfaces, transceivers, onboard MEMs sensors, etc. A BaseJumper **base board** is similar to one of these add-on boards, but with a couple of important differences. 
