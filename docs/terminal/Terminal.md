@@ -89,7 +89,7 @@ A handle to a `System` circuit is created for you automatically. The handle is n
 ``` cppp
 system.print_faults()
 ```
-If you issue a command without specifying a handle, it is assumed by default that the command is a `System` command. So using the `system` handle becomes optional. in this particular example we can also omit the parethesis since the instruction does not take any arguments.
+If you issue a command without specifying a handle, it is assumed by default that the command is a `System` command. So using the `system` handle becomes optional. In this particular example we can also omit the parethesis since the instruction does not take any arguments.
 
 *Shortcut*
 ``` cppp
