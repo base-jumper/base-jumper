@@ -32,8 +32,8 @@ github_username:  base-jumper
 
 # Build settings
 remote_theme: pmarsceill/just-the-docs
-#plugins:
-#  - jekyll-feed
+plugins:
+  - jemoji
 
 # Exclude from processing.
 # The following items will not be processed, by default.
