@@ -8,7 +8,7 @@ has_children: false
 # C++ Programming
 
 ## Intro
-If your application is running on a Platform, the first step is to download the BaseJumper library for that platform. To find out how to get the library, refer to the documentation page for the [platform]({{"docs/platforms/Platforms.html"| relative_url}}). If your application is running on the base board itself, then you will need to see the [Platforms/BaseBoard]({{"docs/Platforms/BaseBoard.html" | relative_url}}) page for info on how to get setup. Once you're set up with the appropriate library, you will have access to a c++ API for controlling the base board's circuits. This page covers the general concepts of how to use the API. Once you understand this, you can start looking at the [Circuits]({{"docs/circuits/Circuits.html" | relative_url}}) pages to see the functions available for each circuit.
+If your application is running on a Platform, the first step is to download the BaseJumper library for that platform. To find out how to get the library, refer to the documentation page for the [platform]({{"docs/platforms/Platforms.html"| relative_url}}). If the application is running directly on the base board, then please see page [Platforms/BaseBoard]({{"docs/Platforms/BaseBoard.html" | relative_url}}) for info on how to get setup. Once you're set up with the appropriate library, you will have access to a c++ API for controlling the base board's circuits. This page covers the general concepts of how to use the API. Once you understand this, you can start looking at the [Circuits]({{"docs/circuits/Circuits.html" | relative_url}}) pages to see the functions available for each circuit.
 
 ## Example
 
@@ -68,7 +68,7 @@ All of the BaseJumper functions and classes live inside a namespace. The namespa
 ``` cpp
 using namespace BaseJumper;
 ```
-Alternatively, you can choose to use fully qualified names for all library members, such as `BaseJumper::Led::Handle` instead of just `Led::Handle`. This is sometimes necessary (albeit rare) if there are name collisions between library code and other code in your application. If you're unsure, just start with the using statement above.
+Alternatively, you can choose to use fully qualified names for all library members, such as `BaseJumper::Led::Handle` instead of just `Led::Handle`. This is sometimes necessary (albeit rare) if there are name collisions between library code and other code in your application. If you're unsure, just start with the `using` statement as above.
 
 ## Initialisation
 
@@ -129,8 +129,8 @@ At the bottom of the `loop` function there is a line we still haven't discussed.
 ``` cpp
 delay(50);
 ```
-This line inserts a delay (in this case 50ms) between executions of the loop. If your control loop is very simple, like this example, then we recommend that you put in a delay. If not, the loop is going to executing very quickly and the base board will be flooded with commands that it needs to execute. When the base board receives a circuit command, it makes it its top priority to act on that command and return a response ASAP. To achieve this, other less-urgent tasks such as reporting, servicing the terminal, etc, are put aside while the task is executed. If you keep throwing circuit instructions at the base board as fast as it can handle it, then the less-urgent tasks that are being put aside will start to pile-up. At this point the base board is forced to reduce the priority at which circuit commands are executed so that other tasks have a chance to complete. When this happens, you may notice an increase in the time it takes the base-board to respond to commands. The base board will effectively 'throttle' the speed at which your control loop runs for you, because the method calls on the circuit handles won't return until the base board has had time to do its own housekeeping. It's best to avoid this situation by inserting delays as needed at the end of the control loop, or between large groups of circuit commands that run in quick succession. 
-
-For a more complex control system running computationally-expensive algorithms, the time taken to perform computations may slow down the control loop enough that explicit delays are not required. 
+This line inserts a delay (in this case 50ms) between executions of the loop. If your control loop is very simple, like this example, then we recommend that you put in a delay. If not, the loop is going to execute very quickly and the base board will be flooded with commands that it needs to execute. When the base board receives a circuit command, it makes it its top priority to act on that command and return a response ASAP. To achieve this, other less-urgent tasks such as reporting, servicing the terminal, etc, are put aside while the task is executed. If you keep throwing circuit instructions at the base board as fast as it can handle it, then the less-urgent tasks that are being put aside will start to pile-up. At this point the base board is forced to reduce the priority at which circuit commands are executed so that other tasks have a chance to complete. When this happens, you may notice an increase in the time it takes the base-board to respond to commands. The base board will effectively 'throttle' the speed at which your control loop runs for you, because the method calls on the circuit handles won't return until the base board has had time to do its own housekeeping. It's best to avoid this situation by inserting delays as needed at the end of the control loop, or between large groups of circuit commands that run in quick succession. 
 
 The `delay` function used in this example is part of the standard `Arduino` library. You will need to find the equivalent function for the platform you are using.
+
+For a more complex control system running computationally-expensive algorithms, the time taken to perform computations may slow down the control loop enough that explicit delays are not required. 
