@@ -78,7 +78,7 @@ basejumper_init();
 ```
 This will ensure that the BaseJumper library has an opportunity to configure the resources it needs (eg. SPI bus and GPIO pins) before you start trying to issue commands to circuits.
 
-## Creating a Circuit Handle
+## Circuit Handle Construction
 
 To control a circuit, the first step is to create a handle to the circuit. The example program above creates two circuit handles.
 ``` cpp
@@ -91,13 +91,50 @@ The first thing to note is that all circuit handle types end in `::Handle`. Say 
 
 Next, look at the constructor argument. In this example both constructors are passed a single argument of `0`. This identifies the *instance* of the circuit you want to control. Circuit numbering starts at zero, so here we are saying we want to use the first instance of the `DigitalInput` and `Led` circuits. It is not uncommon for base boards to have multiple instances of a particular circuit. If the base board has four `DigitalInputs` and we want to control the last one, then the handle constructor argument would be `3`. 
 
-## Creating a Circuit Handle to a Remote Base Board
+## Circuit Handle to a Remote Base Board
 
 Suppose the circuit we wish to control is not on the local base board, but is on another base board that is linked by CAN. In this case we will need two constructor arguments to create the Circuit handle. The first argument specifies the *board ID* of the remote base board and the second argument specifies the circuit *instance*. Below is an example.
 ``` cpp
 DigitalInput::Handle proximity_sensor(5, 1); // handle for digital input instance 1 on board with ID 5
 ```
 If the board ID is not specified it defaults to the local board.
+
+## Initialising the Circuit
+Take another look at the `setup` function and you'll notice it has the two lines below.
+``` cpp
+led.create();
+button.create();
+```
+A function called `create` is being invoked on each of the circuit handles. `create` is a special function that all circuit handles have. When you call `create`, the base board allocates the resources it needs to operate that circuit and initializes it so it is ready for use. You should always call `create` before using a circuit, otherwise an exception will be generated.
+
+There may be circuits on the base board that share resources. For example, an `AnalogInput` and an `AnalogOutput` circuit might both share the same connector pin. In this case, you can create either circuit, but not both. An exception will be generated if you try to create two circuits with overlapping resources.
+
+There are a few more *general commands* similar to `create` that are available on all circuit handles. Here's the complete list.
+
+``` cpp
+bool created()
+``` 
+Returns true if the circuit has been successfully created.
+
+``` cpp
+void destroy()
+```
+The opposite of `create`. Releases the resources that are used by a circuit. This should only be called on circuits that have been created, but are no longer required.
+
+``` cpp
+void instructions() 
+```
+Prints a list of all available instructions for that circuit type. This is most often used at the [terminal]({{"docs/terminal/Terminal.html"| relative_url}}).
+
+``` cpp
+uint16_t get_baseboard_api_version()
+```
+Returns the API version of the circuit firmware running on the base board. This needs to match `get_library_api_version()` for everything to work correctly.
+
+``` cpp
+uint16_t get_library_api_version()
+```
+Returns the API version of the library being used to interface with the base board. This needs to match `get_baseboard_api_version` for everything work correctly.
 
 ## Issuing Commands to a Circuit
 
