@@ -9,7 +9,7 @@ nav_order: 5
 ## Intro
 BaseJumper base boards have a serial terminal facility, which you can use to explore, configure, test and monitor your base board. 
 
-The terminal is a great place to start getting to know the base board's features. There are system commands you can run to display all of the available circuits and list the instructions supported by each circuit. To quickly try something out a circuit you can issue a command to it directly from the terminal. Here's a sneak peak. 
+The terminal is a great place to start getting to know the base board's features. There are system commands you can run to display all of the available circuits and list the instructions supported by each circuit. To quickly try something out you can issue a command directly to a circuit from the terminal. Here's a sneak peak. 
 
 ![Terminal sneak peak]({{"assets/images/terminal/terminal_intro.png" | relative_url}})
 

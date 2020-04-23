@@ -36,3 +36,14 @@ void faults()
 void clear_faults()
 ```
 *Clears the `failed_ever` status of all faults*
+
+### board identity
+``` cpp
+void set_board_id(uint8_t id)
+```
+*Sets the board ID which identifies the board on the CAN bus. Valid IDs are `1-250`. IDs outside this range are reserved.*
+
+``` cpp
+uint8_t get_board_id(uint8_t id)
+```
+*Gets the board ID which identifies the board on the CAN bus. Valid IDs are `1-250`. IDs outside this range are reserved.*

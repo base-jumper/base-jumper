@@ -127,14 +127,14 @@ void instructions()
 Prints a list of all available instructions for that circuit type. This is most often used at the [terminal]({{"docs/terminal/Terminal.html"| relative_url}}).
 
 ``` cpp
-uint16_t get_baseboard_api_version()
+uint16_t get_api_version()
 ```
-Returns the API version of the circuit firmware running on the base board. This needs to match `get_library_api_version()` for everything to work correctly.
+Returns the API version of the circuit firmware running on the base board. This needs to match `get_handle_api_version()` for everything to work correctly.
 
 ``` cpp
-uint16_t get_library_api_version()
+uint16_t get_handle_api_version()
 ```
-Returns the API version of the library being used to interface with the base board. This needs to match `get_baseboard_api_version` for everything work correctly.
+Returns the API version of the handle in the library code. This needs to match `get_api_version` for everything work correctly.
 
 ## Issuing Commands to a Circuit
 
@@ -166,8 +166,25 @@ At the bottom of the `loop` function there is a line we still haven't discussed.
 ``` cpp
 delay(50);
 ```
-This line inserts a delay (in this case 50ms) between executions of the loop. If your control loop is very simple, like this example, then we recommend that you put in a delay. If not, the loop is going to execute very quickly and the base board will be flooded with commands that it needs to execute. When the base board receives a circuit command, it makes it its top priority to act on that command and return a response ASAP. To achieve this, other less-urgent tasks such as reporting, servicing the terminal, etc, are put aside while the task is executed. If you keep throwing circuit instructions at the base board as fast as it can handle it, then the less-urgent tasks that are being put aside will start to pile-up. At this point the base board is forced to reduce the priority at which circuit commands are executed so that other tasks have a chance to complete. When this happens, you may notice an increase in the time it takes the base-board to respond to commands. The base board will effectively 'throttle' the speed at which your control loop runs for you, because the method calls on the circuit handles won't return until the base board has had time to do its own housekeeping. It's best to avoid this situation by inserting delays as needed at the end of the control loop, or between large groups of circuit commands that run in quick succession. 
+This line inserts a delay (in this case 50ms) between executions of the loop. If your control loop is very simple, like this example, then we recommend that you put in a delay. If not, the loop is going to run very quickly and the base board will be flooded with commands that it needs to execute. When the base board receives a circuit command, it makes it its top priority to act on that command and return a response ASAP. To achieve this, other less-urgent tasks such as reporting, servicing the terminal, etc, are put aside while the task is executed. If you keep throwing circuit instructions at the base board as fast as it can handle it, then the less-urgent tasks that are being put aside will start to pile-up. At this point the base board is forced to reduce the priority at which circuit commands are executed so that other tasks have a chance to complete. When this happens, you may notice an increase in the time it takes the base-board to respond to commands. The base board will effectively 'throttle' the speed at which your control loop runs for you, because the method calls on the circuit handles won't return until the base board has had time to do its own housekeeping. It's best to avoid this situation by inserting delays as needed at the end of the control loop, or between large groups of circuit commands that run in quick succession. 
 
 The `delay` function used in this example is part of the standard `Arduino` library. You will need to find the equivalent function for the platform you are using.
 
 For a more complex control system running computationally-expensive algorithms, the time taken to perform computations may slow down the control loop enough that explicit delays are not required. 
+
+## System
+There is a circuit type called `System` which deserves a special mention. Unlike other circuits, system doesn't let you control any particular input, output or sensor. Instead, system contains a collection of commands that can be used to configure and manage the base board. You can learn more about it at the [Circuits/System]({{"docs/circuits/System.html" | relative_url}}) page. 
+
+Every base board has exactly one instance of `System`. A handle to System of the local base board has already been constructed for you. It is called `base_system`. You don't need to invoke `create` on the `base_system` either. Here's an example which makes use of `System` to set the board ID when the board powers up.
+
+``` cpp
+#include <BaseJumper.h>
+
+using BaseJumper;
+
+void setup()
+{
+    base_system.set_board_id(5);
+}
+```
+Although system commands can be executed from an application as shown above, it often makes more sense to issue system commands through the [terminal]({{"docs/terminal/Terminal.html" | relative_url}}).
