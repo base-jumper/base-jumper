@@ -27,8 +27,6 @@ This simple example turns on a LED when a switch is pressed. With the BaseJumper
  * the base-board pin-outs. When the switch is closed, the LED should turn on. The LED is located 
  * on the baseboard itself. If the baseboard is inside an enclosure, you might need to remove it 
  * from the enclosure to see the LED.
- *
- * Full documentation is available at: base-jumper.github.io/base-jumper
  */  
 
 #include <BaseJumper.h>
