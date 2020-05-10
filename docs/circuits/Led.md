@@ -13,13 +13,49 @@ LEDs have three supported states: on, off or blinking. The rate at which the led
 
 ## API
 
-### set ###
+### LED state
 ``` cpp
-void set(Led::State state)
+void set_state(Led::State state)
 ```
-*Sets the status of the led.*  
-`state` is the new state for the LED. It can be `State_Off`, `State_On` or `State_Blink`.
+*Sets the state of the lED.*  
+`Led::State_Off` turns the LED off  
+`Led::State_On` turns the LED on  
+`Led::State_Blink` makes the LED blink  
 
+``` cpp
+Led::State get_state()
+```
+*Returns the current state of the LED.*  
+See `set_state` for the possible states.
+
+### Blinking
+``` cpp
+void set_blink_period(uint16_t period)
+```
+*Sets the blink period.*  
+`period` is in milliseconds.  
+Note that the LED will not start blinking until `set_state(Led::State_Blink)` is called.
+
+``` cpp
+uint16_t get_blink_period()
+```
+*Gets the blink period.* 
+
+### Colour
+
+``` cpp
+void set_colour(Led::Colour colour)
+```
+*Sets the colour of the LED.*  
+`Led::Colour_Green` for green  
+`Led::Colour_Red` for red  
+`Led::Colour_Orange` for orange  
+
+``` cpp
+Led::Colour get_colour()
+```
+*Gets the current colour setting of the LED.*  
+See `set_colour` for the possible colours.
 
 ---
 
