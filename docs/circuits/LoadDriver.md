@@ -16,6 +16,8 @@ parent: Circuits
 ### Pulse Width Modulation
 `LoadDrivers` support PWM. By default the duty cycle is set to 100% so that the load driver turns fully on when it is enabled. Use the `set_duty` function to adjust the duty cycle. A [freewheeling diode](https://www.electronicshub.org/flyback-diode-or-freewheeling-diode/) is fitted to handle flyback from inductive loads. 
 
+---
+
 ## API
 
 ## enabling the output
@@ -28,7 +30,7 @@ void enable(bool val)
 ``` cpp
 bool enabled()
 ```
-*Returns the current status of the output.*
+*Returns the current status of the output.*  
 `true` if the output is enabled, `false` if it is disabled.  
 If the output was enabled using `enable(true)` but was then shut-down due to an overload, `enabled()` will still return `true` even though the load has been de-energized. To check for overload shutdown, use `get_status()`.
 

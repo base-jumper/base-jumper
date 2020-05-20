@@ -4,7 +4,7 @@ title: System
 parent: Circuits
 ---
 
-# System #
+# System
 The `System` circuit allows you to configure and manage your baseboard. It's not really a circuit as such, as it doesn't control any physical components on the PCB. However, we treat `System` like a type of meta-circuit in that you interface with it in the same way as a circuit. `System` contains a collection of useful instructions for things like setting the board id number, managing faults, reporting the circuits supported by the board, etc.
 
 `System` commands can be issued from code, or from the serial terminal. `System` commands are especially useful when working at the terminal. Some `System` commands (like `circuits`) are only there to print information to the terminal. Although they can be called from code it wouldn't make much sense to do so. Other commands (like `set_board_id`) are equally useful both in code or at the terminal.

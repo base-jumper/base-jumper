@@ -16,9 +16,17 @@ The `AnalogInput`API provides an option for reading the sensor output as a ratio
 ### Circuit Gain
 The circuit hardware contains signal conditioning stages which can be configured to apply a gain to the signal. There is a resistor network which can be configured as a resistor-divider with a gain of less than 1. There is also a non-inverting op-amp circuit which can provide a gain of over 1. The `Boards` page of each base board specifies the default gain of its `AnalogInput` circuit. If required, the hardware can be modified to adjust the gain to suit a particular application. 
 
-The API function for reading an `AnalogInput` reports the voltage at the output of the sensor, as measured at the connector pin of the base board, before the  
+The API function `get_voltage` is used to read the input voltage. It reports the voltage at the output of the sensor, as measured at the connector pin of the base board. This function accounts for any gain that is applied to the input in the signal condition circuits. If any adjustments are made to the gain, the baseboard should be updated with the new gain setting using the `set_gain` function.
 
-### ADC Gain and Offset
+### Filtering
+`AnalogInput` circuits provide two layers of filtering. First, there is the signal conditioning circuitry on the board. The default circuit population provides a first-order low-pass RC filter. Second, filtering can be applied in software by the `AnalogInput` firmware running on the base board. To enable software filtering, see the filtering API below.
+
+#### Lowpass Filter
+The low-pass filter uses the IIR filtering algorithm below;
+![Simple IIR filter formula]({{"assets/images/eqn-iiravg-implementation.png" | relative_url}})
+Where `y` is the filter output and `x` is the filter input. alpha is a filtering coefficient, which can be adjusted to control the level of filtering. Reducing alpha reduces the cut-off frequency of the filter.  
+
+The filter coefficients are normalized for a time step of 1 second, however the actual time steps are significantly smaller.
 
 ---
 
@@ -30,14 +38,64 @@ The API function for reading an `AnalogInput` reports the voltage at the output 
 
 ## API
 
-### read voltage
+### read the input
 ``` cpp
-int16_t read_volts()
+float get_voltage()
 ```
-*Returns the voltage as measured at the connector pin of the analog input in millivolts.*
+*Returns the voltage as measured at the connector pin of the analog input.*  
+Units are volts. The gain is used to calculate the voltage from the ADC measurement. Result will be filtered if filtering is enabled.
 
-### read ratiometric
 ``` cpp
-int16_t read_ratio()
+int16_t get_raw()
 ```
-*Returns the ratio of the measured voltage at the analog input connector pin, to the 5V external supply. Units are 0.01%. Range is 1-10000.*
+*Returns the ADC measurement.*  
+The result is in units of ADC bits. Result will be filtered if filtering is enabled.
+
+``` cpp
+int16_t get_ratio()
+```
+*Returns the the voltage as measured at the analog input connector pin, as a ratio of the supply voltage on the 5V supply.*  
+Units are 0.01%. Range is 0..10000.
+
+### filtering
+``` cpp
+void set_filt(AnanlogInput::FilterType filter_type)
+```
+*Add or remove a filter.*  
+`AnalogInput::FilterType_None` for no filtering.  
+`AnalogInput::FilterType_Lowpass` for IIR low-pass filter.
+
+```cpp
+FilterType get_filt()
+```
+*Returns the current filter setting.*  
+See `set_filt` for supported filter types.
+
+``` cpp
+void set_filt_coeff(uint8_t index, float val)
+```
+*Configures the filter coefficients of the active filter.*  
+`index` specifies which filter coefficient to set. Coefficients are numbered starting from `0`.  
+`val` is the new value for the filter coefficient.  
+
+`AnalogInput::FilterType_Lowpass` has a single coefficient (`index` of 0). Reducing this coefficient lowers the cut-off frequency.
+
+``` cpp
+float get_filt_coeff(uint8_t index)
+```
+*Returns a filter coefficient of the active filter.*  
+`index` specifies which filter coefficient to return. Coefficients are number starting from `0`.  
+When requesting an `index` that exceeds the supported number of coefficients for the active filter, a result of 0.0 will be returned. 
+
+### gain
+
+``` cpp
+void set_gain(float val)
+```
+*Configures the circuit gain.*
+The circuit gain is used for back-calculating the analog input pin voltage (as reported by `get_voltage`) from the ADC measurement. It is only neccessary to configure the gain if adjustments are made to the signal conditioning hardware of the analog input circuit on the PCB. The gain paramter is kept in non-volatile storage, so it is only neccessary to call this function once after reconfiguring the hardware. The updated gain will be used in all subsequent computations (even after a power cycle).
+
+``` cpp
+float get_gain()
+```
+*Returns the current circuit gain setting.*

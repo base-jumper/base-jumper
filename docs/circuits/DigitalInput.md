@@ -15,6 +15,8 @@ When a mechanical switch closes, the contacts will typically bounce multiple tim
 
 The debouncing algorithm waits for a transition to occur on the input. When a transition is detected the algorithm waits for a specified *settling time* for the voltage to stabilize. The settling time should be set to the longest expected switch bouncing duration. Once the settling time is up, the input is sampled 3 times successively at 10ms intervals to determine the new switch state. If the measurements are inconsistent, then the process repeats until a stable measurement is obtained.
 
+---
+
 ## API
 
 ### read state
