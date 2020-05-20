@@ -22,8 +22,8 @@ The API function `get_voltage` is used to read the input voltage. It reports the
 `AnalogInput` circuits provide two layers of filtering. First, there is the signal conditioning circuitry on the board. The default circuit population provides a first-order low-pass RC filter. Second, filtering can be applied in software by the `AnalogInput` firmware running on the base board. To enable software filtering, see the filtering API below.
 
 #### Lowpass Filter
-The low-pass filter uses the IIR filtering algorithm below;
-![Simple IIR filter formula]({{"assets/images/eqn-iiravg-implementation.png" | relative_url}})
+The software low-pass filter uses the IIR filtering algorithm below;
+![Simple IIR filter formula]({{"assets/images/eqn-iiravg-implementation.png" | relative_url}})  
 Where `y` is the filter output and `x` is the filter input. alpha is a filtering coefficient, which can be adjusted to control the level of filtering. Reducing alpha reduces the cut-off frequency of the filter.  
 
 The filter coefficients are normalized for a time step of 1 second, however the actual time steps are significantly smaller.
@@ -55,7 +55,8 @@ The result is in units of ADC bits. Result will be filtered if filtering is enab
 int16_t get_ratio()
 ```
 *Returns the the voltage as measured at the analog input connector pin, as a ratio of the supply voltage on the 5V supply.*  
-Units are 0.01%. Range is 0..10000.
+Units are 0.01%. Range is 0..10000.  
+Result will be filtered if filtering is enabled.
 
 ### filtering
 ``` cpp

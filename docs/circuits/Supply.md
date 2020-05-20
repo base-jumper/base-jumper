@@ -15,12 +15,16 @@ Base boards have on-board voltage regulators which can be used to power external
 ``` cpp
 void enable(bool val)
 ```
-*Sets the state of the supply. `true` enables the supply. `false` disables the supply.*
+*Sets the state of the supply.*  
+`true` enables the output   
+`false` disables the output
 
 ``` cpp
 bool enabled()
 ```
-*Returns the current state of the supply. `true` if it is enabled. `false` if it is disabled.*
+*Returns the current state of the supply.*  
+`true` if currently enabled  
+`false` if currently disabled
 
 ### fault checking
 ``` cpp
@@ -42,13 +46,14 @@ If the supply has an out-of-tolerance status, calling `reset_status` will return
 ### output voltage monitoring
 
 ``` cpp
-uint16_t get_nominal_voltage()
+float get_nominal_voltage()
 ```
-*Returns the target output voltage of the supply in mV*  
-example: `5000` for a 5V supply.
+*Returns the target output voltage.*  
+Units are volts.
 
 ``` cpp
-uint16_t get_voltage()
+float get_voltage()
 ```
-*Returns the actual supply output voltage in mV.*  
-If the supply is operating correctly this should be very close to the nominal voltage.
+*Returns the actual supply output voltage.*  
+Units are volts.
+If the supply is operating correctly the result should be very close to the nominal voltage.
