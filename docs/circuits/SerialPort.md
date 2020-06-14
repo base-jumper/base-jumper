@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Serial
+title: SerialPort
 parent: Circuits
 ---
 
@@ -20,8 +20,8 @@ Usually the requirement for isolation can be avoided by connecting together the 
 ### Direct Control ###
 The platform you are using probably comes with its own serial port in the form of a UART. However, it might not have the transceiver you need (eg. RS485) or isolation. In this case, you have a couple of options. 
 
-1. Use the UART and transceiver on the base board. The UART on the platform is unused. Data is transferred from the platform to the base board using calls to the basejumper API. The base board then send the data out using its serial port.
-2. Use the UART on the platform with the transciver on the base board. Data is transferred directly from the platform without being touched by the base board. 
+1. Use the UART and transceiver on the base board. The UART on the platform is unused. Data is transferred from the platform to the base board using calls to the basejumper API. The base board then sends the data out using its serial port.
+2. Use the UART on the platform with the transceiver on the base board. Data is transferred directly from the platform without being touched by the base board's processor. 
 
 Option 1 is the default mode. This will work with any platform regardless of whether it has its own UART or not.
 
@@ -34,7 +34,7 @@ Platforms that have a UART will already have the UART pins connected to the tran
 ## API 
 ### start
 ``` cpp
-void start(uint16_t buad, Serial::Config config)
+void start(uint16_t baud, Serial::Config config)
 ```
 *Starts the serial port.*  
 `baud` specifies the baud rate. 9600 is a safe default. Other common baud rates are  1200, 2400, 4800, 19200, 38400, 57600, and 115200.  
@@ -99,4 +99,19 @@ void clear()
 ```
 *Discards all data that is currently in the receive buffer. `available()` is reset to zero.*
 
-## Example
+### direct control
+
+``` cpp 
+void enable_direct_control(bool val);
+```
+*Enables/disables direct control of the `SerialPort` by the platform*  
+Direct control is enabled if `val` is `true`.  
+Direct control is disabled if `val` is `false`.  
+Direct control is disabled by default.
+
+``` cpp
+bool direct_control_enabled();
+```
+*Checks if direct control of the `Serialport` by the platform is currently enabled.*  
+Returns `true` if direct control is enabled.  
+Returns `false` if direct control is disabled.
