@@ -16,6 +16,7 @@ Isolation is sometimes needed if the device you are communicating with has a dif
 
 Usually the requirement for isolation can be avoided by connecting together the grounds of all of the components in the system. Note that there is no harm in using an isolated serial circuit even if it's not strictly required. An isolated circuit will work just fine in all scenarios, provided you rememmber to wire up the ground reference.
 
+Refer to the documentation for your specific base board to see if a Serial instance is isolated. If your base board has other isolated communication circuits such as CANBus, keep in mind that they may share the same isolated supply.
 
 ### Direct Control ###
 The platform you are using probably comes with its own serial port in the form of a UART. However, it might not have the transceiver you need (eg. RS485) or isolation. In this case, you have a couple of options. 
