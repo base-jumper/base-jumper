@@ -155,10 +155,10 @@ Specs specs()
 ```
 *Gets the specifications for a CAN Bus circuit instance.*  
 Returns a `Specs` data structure with the following fields;
+
 | Type | Name | Description |
 | --- | --- | --- | 
 | `bool` | `has_direct_control` | `true` if instance supports direct control |
-| `bool` | `has_isolation` | `true` if transceiver is galvanically isolated | 
 | uint8_t | `max_filts` | maximum number of filters |
 | uint8_t | `max_msg_per_filt` | maximum number of messages for each filter |
 | uint16_t | `max_data_per_filt` | maximum total bytes of data for filter |  
@@ -183,6 +183,7 @@ CanBus::Msg<uint8_t max_len>
 The `max_len` compile-time parameter is the maximum data length of the message (used to allocate storage). For standard CAN 2.0 messages, the payload size only goes up to 8, so `max_len` can be 8. CANFD messages can hold up to 64 bytes of data, so choose `max_len` according to the actual message size you are using.
 
 The structure has the following fields;  
+
 | Type | Name | Description |
 | --- | --- | --- |
 | `CanBus::Id` | `id` | message id |

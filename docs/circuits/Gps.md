@@ -90,6 +90,7 @@ Gps::UnixTimeData get_unix_time()
 ```
 *Returns unix time, plus a validity flag.*  
 The data is packaged into a struct with the following fields;  
+
 | Type | Name | Description |
 | --- | --- | --- |
 | `bool` | `valid` | `true` if the GPS has received sufficient information to provide reliable and accurate time measurements. If `false`, the data in remaining fields should not be trusted. |
@@ -102,6 +103,7 @@ Gps::VelNedData get_vel_ned()
 ```
 *Returns North-East-Down velocity vectors, plus information on measurement validity and accuracy.*  
 The data is packaged into a struct with the following fields;  
+
 | Type | Name | Description |
 | --- | --- | --- |
 | `bool` | `valid` | `true` if the GPS has received sufficient information to provide reliable and accurate speed measurements. If `false`, the data in remaining fields should not be trusted. |
@@ -115,6 +117,7 @@ Gps::VelNedData get_ground_speed()
 ```
 *Returns ground speed, plus information on measurement validity and accuracy.*  
 The data is packaged into a struct with the following fields;  
+
 | Type | Name | Description |
 | --- | --- | --- |
 | `bool` | `valid` | `true` if the GPS has received sufficient information to provide reliable and accurate speed measurements. If `false`, the data in remaining fields should not be trusted. |
