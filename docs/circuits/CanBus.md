@@ -16,7 +16,7 @@ CAN should wired in a *bus topology*. There should be a single central cable (ca
 It's a good idea to use shielded cable if you're doing long runs, high data rates, operating in a paricularly noisy environment, or concerned about electromagnetic emissions. There is cable available that is specifically suited to CAN. It will contain a shielded twisted pair for the data, and often comes with an additional twisted pair of thicker wires for distributing power. Here is an [example](https://www.helukabel.com/en/products/helukabel-reg-devicenet-trade-pvc-opc-DNT_800683.html).
 
 ### Termination
-Terminating a CAN bus is essential. Without proper termination, reflections will occur when signal reaches the end of the bus. The signal will bounce back and forth along the bus, causing interference. To terminate the bus, place a 120ohm resistor between the two data lines at each end of the bus. The location of the resistors is important - be sure to place them at each end of the bus near the first and last devices. Proper termination will stop those nasty reflections, giving you a nice clean signal.
+Terminating a CAN bus is essential. Without proper termination, reflections will occur when signals reach the end of the bus. The signal will bounce back and forth along the bus, causing interference. To terminate the bus, place a 120ohm resistor between the two data lines at each end of the bus. The location of the resistors is important - be sure to place them at each end of the bus near the first and last devices. Proper termination will stop those nasty reflections, giving you a nice clean signal.
 
 ![can bus termination!]({{"assets/images/can_termination.jpg" | relative_url}})
 
@@ -27,7 +27,7 @@ To check if your bus has the right number of terminating resistors, you can use 
 ### Isolation
 Isolation is sometimes needed if the device you are communicating with has a different ground reference to the base board. This situation arises if the remote device is not powered from the same power supply as the base board, or if there are long cable lengths between devices. In these situations you should select a base board with galvanically isolated serial circuit. In addition to the data lines, isolated circuits will have an additional pin for a ground reference. Connect this to the ground of the remote device you are communicating with. Once this is connected up, the communications will work even if ground potential of the remote device is different to the base board.
 
-Usually the requirement for isolation can be avoided by connecting together the grounds of all of the components in the system. Note that there is no harm in using an isolated serial circuit even if it's not strictly required. An isolated circuit will work just fine in all scenarios, provided you rememmber to wire up the ground reference.
+Usually the requirement for isolation can be avoided by connecting together the grounds of all of the components in the system. Note that there is no harm in using an isolated serial circuit even if it's not strictly required. An isolated circuit will work just fine in all scenarios, provided you remember to wire up the ground reference.
 
 Refer to the documentation for your specific base board to see if a CANBus instance is isolated. If your base board has other isolated communication circuits such as RS485, keep in mind that they may share the same isolated supply.
 
@@ -62,7 +62,7 @@ void setup()
 {
     basejumper_init();
     can.create();
-    can.start(CanBus::Baud_125KHz, false); // connects to the can bus with baud 125K and CAN FD disabled
+    can.start(CanBus::Baud_125K, false); // connects to the can bus with baud 125Kb/s and CAN FD disabled
 }
 ```
 
@@ -125,7 +125,7 @@ void loop()
     auto msg_count = can.available(filt_id);
     while (msg_count > 0)
     {
-        // read the message
+        // read a message
         auto msg = can.read<8>(filt_id);
             
         char str[100];
@@ -139,6 +139,7 @@ void loop()
             sprintf("data frame with id: %u, len: %u, byte0: %x", msg.id, msg.len, msg.data.item[0]);
             // this is a data frame. go ahead and access the data in msg.data.items.
         }
+        msg_count--;
     }
 }
 ```
@@ -147,7 +148,22 @@ Each filter has an associated buffer for holding received messages. When a messa
 
 ## API
 
-#### data structures
+### specs
+
+``` cpp
+Specs specs()
+```
+*Gets the specifications for a CAN Bus circuit instance.*  
+Returns a `Specs` data structure with the following fields;
+| Type | Name | Description |
+| --- | --- | --- | 
+| `bool` | `has_direct_control` | `true` if instance supports direct control |
+| `bool` | `has_isolation` | `true` if transceiver is galvanically isolated | 
+| uint8_t | `max_filts` | maximum number of filters |
+| uint8_t | `max_msg_per_filt` | maximum number of messages for each filter |
+| uint16_t | `max_data_per_filt` | maximum total bytes of data for filter |  
+
+### data structures
 
 ``` cpp
 CanBus::Id
@@ -158,7 +174,7 @@ Use `CanBus::Id::ext(uint32_t val)` to create an extended 29-bit ID.
 
 | Type | Name | Description |
 | --- | --- | --- |
-| uint32_t | value | id value |
+| `uint32_t` | `value` | id value |
 
 ``` cpp
 CanBus::Msg<uint8_t max_len>
@@ -169,10 +185,10 @@ The `max_len` compile-time parameter is the maximum data length of the message (
 The structure has the following fields;  
 | Type | Name | Description |
 | --- | --- | --- |
-| CanBus::Id | id | message id |
-| bool | is_rtr | `true` for RTR frame, `false` for data frame
-| uint8_t | data_len | actual length of data (or requested data in case of RTR)
-| uint8_t[max_len] | data.items | standard c array holding the data
+| `CanBus::Id` | `id` | message id |
+| `bool` | `is_rtr` | `true` for RTR frame, `false` for data frame |
+| `uint8_t` | `data_len` | actual length of data (or requested data in case of RTR) |
+| `uint8_t[max_len]` | `data.items` | standard c array holding the data |
 
 ### connecting
 
@@ -181,11 +197,11 @@ void start(CanBus::Baud baud, bool use_fd)
 ```
 *Brings the CAN bus online.*  
 `baud` specifies the bus baud rate. 125 kbit/s & 250 kbits/s are most commonly used. The maximum speed for CAN 2.0 is 1MB/s. Speeds above that are for CANFD only. Supported bauds are;  
-`CanBus::Baud_125KHz`  
-`CanBus::Baud_250KHz`  
-`CanBus::Baud_500KHz`  
-`CanBus::Baud_1MHz`  
-`CanBus::Baud_2MHz`  
+`CanBus::Baud_125K`  
+`CanBus::Baud_250K`  
+`CanBus::Baud_500K`  
+`CanBus::Baud_1M`  
+`CanBus::Baud_2M`  
 
 `use_fd` specifies whether support for CANFD should be enabled.
 
