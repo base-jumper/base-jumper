@@ -29,6 +29,7 @@ baseurl: "/base-jumper" # the subpath of your site, e.g. /blog
 #url: "http://wwww.basejumper.io" # the base hostname & protocol for your site, e.g. http://example.com
 #twitter_username: base-jumper
 github_username:  base-jumper
+color_scheme: basejumper
 
 # Build settings
 remote_theme: pmarsceill/just-the-docs

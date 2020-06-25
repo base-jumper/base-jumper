@@ -51,6 +51,7 @@ Gps::LatLonData get_lat_lon();
 ```
 *Returns latitude, longitude and some information about the validity and accuracy of the measurements.*   
 The data is packaged into a struct containing the following fields;  
+
 | Type | Name | Description |
 | --- | --- | --- |
 | `bool` | `valid` | `true` if the GPS has received sufficient information to provide reliable and accurate latitude and longitude measurements. If `false`, the data in the remaining fields should not be trusted. |
@@ -63,6 +64,7 @@ Gps::LatLonAltData get_lat_lon_alt();
 ```
 *Returns latitude, longitude, altitude and some information about the validity and accuracy of the measurements.*   
 The data is packaged into a struct containing the following fields;  
+
 | Type | Name | Description |
 | --- | --- | --- |
 | `bool` | `valid` | `true` if the GPS has received sufficient information to provide reliable and accurate latitude, longitude and altitude measurements. If `false`, the data in remaining fields should not be trusted. |
@@ -80,6 +82,7 @@ Gps::UtcTimeData get_utc_time()
 ```
 *Returns broken-down UTC time, plus a validity flag.*
 The data is packaged into a struct with the following fields;  
+
 | Type | Name | Description |
 | --- | --- | --- |
 | `bool` | `valid` | `true` if the GPS has received sufficient information to provide reliable and accurate time measurements. If `false`, the data in remaining fields should not be trusted. |

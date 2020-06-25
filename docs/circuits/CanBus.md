@@ -154,7 +154,7 @@ Each filter has an associated buffer for holding received messages. When a messa
 Specs specs()
 ```
 *Gets the specifications for a CAN Bus circuit instance.*  
-Returns a `Specs` data structure with the following fields;
+Returns a `Specs` data structure with the following fields;  
 
 | Type | Name | Description |
 | --- | --- | --- | 
