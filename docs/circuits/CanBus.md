@@ -46,6 +46,17 @@ Not all `CANBus` circuit instances offer direct control. There is an API functio
 ### CAN FD
 BaseJumper boards have full hardware support for CAN FD. Some CAN FD features are also supported in software. The software supports speeds beyond 1MB/s, and payload lengths up to 64 bits. The software does not currently support dynamic changing of transmission speeds. Of course, BaseJumper boards will also work just fine on CAN 2.0 networks.
 
+## Hardware Customization
+This section describes the customizations that can be made to the base board's hardware. Only general information is provided here. Component designators and board assembly drawings can be found on the [boards]({{"docs/boards/index.html" | relative_url}}) page for a specific base board.
+
+### Termination
+Provision is provided for on-board terminating resistors. A split termination scheme is used for improved EMC performance. Split termination uses two 60ohm resistors in series instead of a single 120ohm resistor.
+
+| Component Name | Description |
+| --- | --- | --- |
+| Rterm1 | Upper termination resistor |
+| Rterm2 | Lower termination resistor | 
+
 ## Software
 
 ### Initialization
@@ -265,8 +276,8 @@ CanBus::Status get_status()
 | Value | Description |
 | --- | --- |
 | `CanBus::Status_Ok` | Indicates there have been no errors |
-| `CanBus::RxOverflow` | Receive buffer for one or more of the filters has overflowed |
-| `CanBus::TxOverflow` | Transmit buffer has overflowed |
+| `CanBus::Status_RxOverflow` | Receive buffer for one or more of the filters has overflowed |
+| `CanBus::Status_TxOverflow` | Transmit buffer has overflowed |
 
 The status is latched. It will only return to `Status_Ok` after `reset_status` is called.
 
