@@ -159,9 +159,9 @@ Returns a `Specs` data structure with the following fields;
 | Type | Name | Description |
 | --- | --- | --- | 
 | `bool` | `has_direct_control` | `true` if instance supports direct control |
-| uint8_t | `max_filts` | maximum number of filters |
-| uint8_t | `max_msg_per_filt` | maximum number of messages for each filter |
-| uint16_t | `max_data_per_filt` | maximum total bytes of data for filter |  
+| `uint8_t` | `max_filts` | maximum number of filters |
+| `uint8_t` | `max_msg_per_filt` | maximum number of messages for each filter |
+| `uint16_t` | `max_data_per_filt` | maximum total bytes of data for filter |  
 
 ### data structures
 
@@ -255,3 +255,23 @@ void write(CanBus::Msg<max_len> messsage)
 `max_len` is a compile-time argument specifying the maximum expected data length. It is used to allocate space to store the data.  
 `message` is the can message to be written to the bus.
 
+### status
+
+``` cpp
+CanBus::Status get_status()
+```
+*Returns an enum indicating the CAN Bus circuit status.*  
+
+| Value | Description |
+| --- | --- |
+| `CanBus::Status_Ok` | Indicates there have been no errors |
+| `CanBus::RxOverflow` | Receive buffer for one or more of the filters has overflowed |
+| `CanBus::TxOverflow` | Transmit buffer has overflowed |
+
+The status is latched. It will only return to `Status_Ok` after `reset_status` is called.
+
+``` cpp 
+void reset_status()
+```
+*Clears the status.*  
+Status is returned to `Status_Ok`.
