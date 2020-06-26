@@ -17,7 +17,7 @@ This section provides specifications for the circuits available on the base boar
 | **Termination** | population option | population option |
 | **CANFD support** | yes | yes |
 
-*See also*  [[circuit docs]]({{"docs/Circuits/CanBus.html" | relative_url}}) [[configurations]](#CAN-Bus-Config)
+*See also*  [[circuit docs]]({{"docs/circuits/CanBus.html" | relative_url}}) [[configurations]](#can-bus-config)
 
 ---
 
@@ -31,7 +31,7 @@ This sections provides details of component designators and the default populati
 | Rterm1 | Rx | Ry |
 | Rterm2 | Ra | Rb |
 
-*See also* [[circuit docs]](({{"docs/Circuits/CanBus.html#Hardware-Customization" | relative_url}}) [[bom]]() [[assembly drawing]]()
+*See also* [[circuit docs]](({{"docs/circuits/CanBus.html#hardware-customization" | relative_url}}) [[bom]]() [[assembly drawing]]()
 
 ---
 
