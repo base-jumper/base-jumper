@@ -6,8 +6,8 @@ parent: Boards
 
 # Navagio
 
-## Specifcations
-This section provides specifications for the circuits available on the base board. These specications are for the default population, and may not apply if any customizations have been made. For general infomation on how to use a particular circuit, refer to the *circuit docs* linked beneath the table.
+## Specifications
+This section provides specifications for the circuits available on the base board. These specifications are for the default population, and may not apply if any customizations have been made. For general information on how to use a particular circuit, refer to the *circuit docs* linked beneath the table.
 
 ### CAN Bus Specs
 
@@ -22,7 +22,7 @@ This section provides specifications for the circuits available on the base boar
 ---
 
 ## Configurations
-This sections provides details of component designators and the default population. This information, together with the PCB assembly drawing, can be used to make customization to the base board hardware to suit a given application.
+This sections provides details of component designators and the default population. This information, together with the PCB assembly drawing, can be used to make customizations to the base board hardware to suit a given application.
 
 ### CAN Bus Config
 
@@ -31,9 +31,19 @@ This sections provides details of component designators and the default populati
 | Rterm1 | Rx | Ry |
 | Rterm2 | Ra | Rb |
 
-*See also* [[circuit docs]](({{"docs/circuits/CanBus.html#hardware-customization" | relative_url}}) [[bom]]() [[assembly drawing]]()
+*See also* [[circuit docs]](({{"docs/circuits/CanBus.html#hardware-customization" | relative_url}}) [[bom]](#bom) [[assembly drawing]](#assembly-drawing)
 
 ---
+
+## Pin Outs
+
+**Connector A**  
+
+| Pin # | Function 1 | Function 2 |
+| --- | --- | --- |
+| x | AnalogInput 0 | AnalogOutput 0 |
+| y | AnalogInput 1 | AnalogOutput 1 |
+| z | Supply 0 | - |
 
 ## PCB Assembly Drawing
 
