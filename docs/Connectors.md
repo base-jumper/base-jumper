@@ -10,6 +10,7 @@ This page provides details on the connectors used on BaseJumper base boards. You
 ## Molex MX150 (20+12)
 
 ### Part Numbers for Mating Connectors
+
 | Description | Manufacturer | Part Number | Supplier |
 | --- | --- | --- | --- |
 | Connector, 20-pin | Molex | 33472-2002 | [Mouser](https://www.mouser.com/ProductDetail/Molex/33472-2002?qs=%2Fha2pyFaduhz%2FnD9x4rgUTHvnKZL1NU4KSw4KNCAN%252Bc%3D) \| [DigiKey](https://www.digikey.com.au/products/en?keywords=33472-2002) | 
