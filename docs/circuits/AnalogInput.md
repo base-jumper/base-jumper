@@ -29,6 +29,13 @@ Where `y` is the filter output and `x` is the filter input. alpha is a filtering
 The filter coefficients are normalized for a time step of 1 second, however the actual time steps are significantly smaller.
 
 ---
+## Hardware Customization
+This section describes the customizations that can be made to the circuit's hardware. Only general information is provided here. Component designators and board assembly drawings can be found on the [boards]({{"docs/boards/index.html" | relative_url}}) page for a specific base board.
+
+### Resistor network
+
+
+### Amplifier gain
 
 ## Hardware
 * Configure gain

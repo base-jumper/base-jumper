@@ -9,6 +9,14 @@ parent: Boards
 ## Specifications
 This section provides specifications for the circuits available on the base board. These specifications are for the default population, and may not apply if any customizations have been made. For general information on how to use a particular circuit, refer to the *circuit docs* linked beneath the table.
 
+### Analog Input Specs
+
+| Instance | 0 | 1 |
+| :--- | --- | --- |
+| Input Voltage Range* | 0-10V | 0-10V |
+| ADC Resolution | 12-bit | 12-bit |
+* For higher input voltages, configure resistor-divider network
+
 ### CAN Bus Specs
 
 | Instance | 0 | 1 |
