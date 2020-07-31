@@ -32,7 +32,6 @@ Supply::Status get_status()
 ```
 *Gets the status of the supply.*  
 `Supply::Status_Ok` if supply is functioning normally.  
-`Supply::Status_OutOfTolerance` indicates that the supply voltage has deviated outside the expected normal range.  
 `Supply::Status_OverloadShutdown` indicates an overload fault occured and the supply has shutdown to protect itself.  
 
 ``` cpp
@@ -41,7 +40,6 @@ void reset_status()
 *Resets the supply status.*
 This can be called to attempt to recover from an abnormal condition.
 If the supply was shutdown due to an overload, calling `reset_status` will re-enable the supply. 
-If the supply has an out-of-tolerance status, calling `reset_status` will return the status back to `Status_Ok`.
 
 ### output voltage monitoring
 
