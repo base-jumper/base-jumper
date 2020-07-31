@@ -105,7 +105,7 @@ void clear()
 ``` cpp 
 void enable_direct_control(bool val);
 ```
-*Enables/disables direct control of the `SerialPort` by the platform*  
+*Enables/disables direct control by the platform*  
 Direct control is enabled if `val` is `true`.  
 Direct control is disabled if `val` is `false`.  
 Direct control is disabled by default.
@@ -113,6 +113,6 @@ Direct control is disabled by default.
 ``` cpp
 bool direct_control_enabled();
 ```
-*Checks if direct control of the `Serialport` by the platform is currently enabled.*  
+*Checks if direct control by the platform is currently enabled.*  
 Returns `true` if direct control is enabled.  
 Returns `false` if direct control is disabled.

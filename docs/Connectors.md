@@ -22,6 +22,9 @@ This page provides details on the connectors used on BaseJumper base boards. You
 
 Other connector options (gold contacts, etc) are also available. Refer to the Molex website for details.
 
+[Instructions for crimping terminals](https://www.molex.com/pdm_docs/ats/ATS-638116000.pdf)  
+[Instructions for extracting terminals](https://www.molex.com/pdm_docs/ats/ATS-638131500-001.pdf)
+
 ### Professional Tooling
 
 | Description | Manufacturer | Part Number | Supplier |

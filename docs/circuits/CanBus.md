@@ -286,3 +286,20 @@ void reset_status()
 ```
 *Clears the status.*  
 Status is returned to `Status_Ok`.
+
+### direct control
+
+``` cpp 
+void enable_direct_control(bool val);
+```
+*Enables/disables direct control by the platform*  
+Direct control is enabled if `val` is `true`.  
+Direct control is disabled if `val` is `false`.  
+Direct control is disabled by default.
+
+``` cpp
+bool direct_control_enabled();
+```
+*Checks if direct control by the platform is currently enabled.*  
+Returns `true` if direct control is enabled.  
+Returns `false` if direct control is disabled.
