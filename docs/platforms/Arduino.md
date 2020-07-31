@@ -59,3 +59,20 @@ void loop()
     delay(50);
 }
 ```
+
+## Pin Mappings
+
+| Uno Pin* | MKR Pin* | Label | Circuit | Description | 
+| ---   | ---             | ---             | ---     | ---         |
+|  D13 | D9 | CTL_SCLK | System | SPI control of base board - clock) |
+| D12 | D10 | CTL_MISO | System | SPI control of base board - miso |
+| D11 | D8 | CTL_MOSI | System | SPI control of base board - mosi |
+| D10 | D7 | CTL_CS# | System | SPI control of base board - chip select |
+| D9 | D6 | CTL_BUSY# | System | SPI control of base board - busy signal |
+| D3 | D5 | CTL_WAKE  | System | Used by baseboard to wake platform |
+| D2 | D21 | COM_SER_TXEN | SerialPort | Serial direct control - transmit enable for rs485 |
+| D1 | D14 | COM_SER_TX | SerialPort | Serial direct control - transmit | 
+| D0 | D13 | COM_SER_RX | SerialPort | Serial direct control - receive | 
+
+**There may be additional connections made for powering & resetting the platform that are not included in this table.*  
+**Arduino pin numbers refer to the digital pin number.*
