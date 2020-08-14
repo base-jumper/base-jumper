@@ -52,24 +52,24 @@ There is no performance penalty in terms of software overheads, interrupt loadin
 ### Configuration Sequence
 Changing configurations and operating modes on-the-fly is possible, but not recommended. Each time the mode is changed, the count will be reset to zero. The recommended start-up sequence is as follows;
 
-1) Create the encoder resource
-2) Set the pin configurations
-3) Set the operating mode
-4) Set the multiplier
-5) Set the speed interval if operating in speed mode.
-6) Run a zeroing sequence while polling `seen_index`. How the encoder is zeroed is application specific. You must decide how to best do this for your application. This is only applicable for modes that use the index pulse and can be skipped for relative position measurements and speed measurements.
-7) If measuring position and an offset is required (i.e. zero count is somewhere other than the index location), call `set_position`.
-8) Start taking measurements from `get_position` or `get_speed`
+1) Create the encoder resource  
+2) Set the pin configurations  
+3) Set the operating mode  
+4) Set the multiplier  
+5) Set the speed interval if operating in speed mode.  
+6) Run a zeroing sequence while polling `seen_index`. How the encoder is zeroed is application specific. You must decide how to best do this for your application. This is only applicable for modes that use the index pulse and can be skipped for relative position measurements and speed measurements.  
+7) If measuring position and an offset is required (i.e. zero count is somewhere other than the index location), call `set_position`.  
+8) Start taking measurements from `get_position` or `get_speed`  
 
 The operating mode, pin configurations and multiplier will be remembered between power cycles. However, there is no harm in setting them each time in the power up sequence.
 
 ## Hardware Customization
-The recommended hardware customization options for the `DigitalInput` circuits used as encoder inputs are below. This setup has been tested with pulse rates up to 15KHz (ie. 60K counts/sec in 4x mode).
+The recommended hardware customization options for `DigitalInput` circuits used as encoder inputs are below. This setup has been tested with pulse rates up to 15KHz (ie. 60K counts/sec in 4x mode).
 
 | Component Name | Description | Value |
 | --- | --- | --- |
 | Rhyst | Sets hysteresis | 78.7k |
-| Rthresh | Sets threshold | 51k |
+| Rthres | Sets threshold | 51k |
 | Cfilt | Sets filtering | 100pF | 
 
 In most cases, this will be the default configuration that the base board ships with. So providing it is wired up correctly, everything should work just fine out-of-the-box.
