@@ -63,7 +63,18 @@ Changing configurations and operating modes on-the-fly is possible, but not reco
 
 The operating mode, pin configurations and multiplier will be remembered between power cycles. However, there is no harm in setting them each time in the power up sequence.
 
+## Hardware Customization
+The recommended hardware customization options for the `DigitalInput` circuits used as encoder inputs are below. This setup has been tested with pulse rates up to 15KHz (ie. 60K counts/sec in 4x mode).
 
+| Component Name | Description | Value |
+| --- | --- | --- |
+| Rhyst | Sets hysteresis | 78.7k |
+| Rthresh | Sets threshold | 51k |
+| Cfilt | Sets filtering | 100pF | 
+
+In most cases, this will be the default configuration that the base board ships with. So providing it is wired up correctly, everything should work just fine out-of-the-box.
+
+If changes are made to the circuit, it is important not to add too much filtering. Filtering can attenuate the phase signals, and increase propagation delays.  
 
 ## API
 

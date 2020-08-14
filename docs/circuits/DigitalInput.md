@@ -15,6 +15,24 @@ When a mechanical switch closes, the contacts will typically bounce multiple tim
 
 The debouncing algorithm waits for a transition to occur on the input. When a transition is detected the algorithm waits for a specified *settling time* for the voltage to stabilize. The settling time should be set to the longest expected switch bouncing duration. Once the settling time is up, the input is sampled 3 times successively at 10ms intervals to determine the new switch state. If the measurements are inconsistent, then the process repeats until a stable measurement is obtained.
 
+## Hardware Customization
+This section describes the customizations that can be made to the base board's hardware. Only general information is provided here. Component designators and board assembly drawings can be found on the [boards]({{"docs/boards/index.html" | relative_url}}) page for a specific base board.
+
+## Switching thresholds
+Resistor values can be changed to adjust the switching thresholds and  hysteresis. The table below provides resistor values for a few different configurations. The `General` configuration is a good all-round configuration suitable for high speed inputs (it is normally the default configuration that the base board ships with). `3.3V CMOS` and `TTL` are alternative configurations to closer match the respective standards.
+
+| Component Name | Description | General | 3.3V CMOS | TTL |
+| --- | --- | --- | --- | --- | --- |
+| Rhyst | Sets hysteresis | 51K | 56k | 75k | 
+| Rthres | Sets threshold | 78.7K | 15k | 10k |
+
+## Filtering
+The circuit contains a low pass RC filter. The filter cut-off frequency can be adjusted by changing a capacitor value. The `General` configuration (typically the default) below is suitable for high speed signals such as encoder inputs. For lower speed signals, such as mechanical switches, where increased noise immunity is desired, the filtering can be increased. `General` provides a filter cut-off frequency of approximately 70KHz, `Low-speed` is 7KHz.
+
+| Component Name | Description | General | Low-speed |
+| --- | --- | --- | --- | 
+| Cfilt | Sets filtering | 100pF | 1nF |
+
 ---
 
 ## API
