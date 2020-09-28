@@ -5,7 +5,7 @@ parent: Platforms
 ---
 
 # Arduino
-Arduino hardly needs an introduction. Arduinos have been used by hobbyists worldwide to build all manner of gadgets from [real-life iron man suits](https://www.youtube.com/watch?v=dNtXt5NUALQ) to [rubik cube solving robots](https://www.youtube.com/watch?v=NRRSYEWIQ_w). Arduino started out as a platform for learning, education and general hackery. But don't be too quick to judge. More recent additions to the Arduino family make it a serious prospect for building commercial systems on a budget. The MKR footprint was introduced with a range of different wireless communication technlogies aimed at IoT applications. Recently Arduino announced the release of the powerful new [Portenta H7](https://store.arduino.cc/usa/portenta-h7). With a dual Cortex M7 (480MHz) + M4 processor (240MHz), WiFi, Bluetooth 5.1, ethernet, and the ability to run computer vision applications in TensorFlow Lite - this is a far cry from the humble Arduino Uno. It provides plenty of grunt to meet the requirements of many demanding industrial applications.
+Arduino hardly needs an introduction. Arduinos have been used by hobbyists worldwide to build all manner of gadgets from [real-life iron man suits](https://www.youtube.com/watch?v=dNtXt5NUALQ) to [rubik cube solving robots](https://www.youtube.com/watch?v=NRRSYEWIQ_w). Arduino started out as a platform for learning, education and general hackery. But don't be too quick to judge. More recent additions to the Arduino family make it a serious prospect for building commercial systems on a budget. The MKR footprint was introduced with a range of different wireless communication technologies aimed at IoT applications. Recently Arduino announced the release of the powerful new [Portenta H7](https://store.arduino.cc/usa/portenta-h7). With a dual Cortex M7 (480MHz) + M4 processor (240MHz), WiFi, Bluetooth 5.1, ethernet, and the ability to run computer vision applications in TensorFlow Lite - this is a far cry from the humble Arduino Uno. It provides plenty of grunt to meet the requirements of many demanding industrial applications.
 
 ## Support
 At present, Arduino boards with the Arduino Uno and MKR form factors are supported.
@@ -13,7 +13,7 @@ At present, Arduino boards with the Arduino Uno and MKR form factors are support
 ## Getting Started
 * Install the BaseJumper library for Arduino.
 * Add `#include "BaseJumper.h` at the top of your sketch. Note that this should be inserted automatically when you select the library.
-* All BaseJumper code is inside the namespace `BaseJumper`. You might wish to bring this namespace into scope with a using directive: `using BaseJumper;`
+* All BaseJumper code is inside the namespace `BaseJumper`. You might wish to bring this namespace into scope with a using directive: `using namespace BaseJumper;`
 
 ## Example
 This simple example turns on a LED when a switch is pressed. With the BaseJumper Arduino library installed you can also find it in the Arduino IDE under `File > Examples > BaseJumper > button_led`.
@@ -64,7 +64,7 @@ void loop()
 
 | Uno Pin* | MKR Pin* | Label | Circuit | Description | 
 | ---   | ---             | ---             | ---     | ---         |
-|  D13 | D9 | CTL_SCLK | System | SPI control of base board - clock) |
+|  D13 | D9 | CTL_SCLK | System | SPI control of base board - clock |
 | D12 | D10 | CTL_MISO | System | SPI control of base board - miso |
 | D11 | D8 | CTL_MOSI | System | SPI control of base board - mosi |
 | D10 | D7 | CTL_CS# | System | SPI control of base board - chip select |
