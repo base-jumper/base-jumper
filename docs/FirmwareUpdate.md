@@ -16,10 +16,10 @@ Coming soon.
 
 
 1. [Download](https://www.microchip.com/DevelopmentTools/ProductDetails/PartNO/SAM-BA%20In-system%20Programmer) the SAM-BA application from Microchip. Be sure to grab v3 which is a command line tool (the earlier v2 is a GUI tool which isn't covered here). Extract the contents of the zip to a folder.
-2. Add the SAM-BA folder to your PATH, so you can easily launch `sam-ba.exe` from the command line. Instructions [here](https://docs.alfresco.com/4.2/tasks/fot-addpath.html), [linux](https://docs.oracle.com/cd/E19062-01/sun.mgmt.ctr36/819-5418/gaznb/index.html), [mac](https://www.architectryan.com/2012/10/02/add-to-the-path-on-mac-os-x-mountain-lion/).   
+2. Add the SAM-BA folder to your PATH, so you can easily launch `sam-ba.exe` from the command line. Instructions here for [windows](https://docs.alfresco.com/4.2/tasks/fot-addpath.html), [linux](https://docs.oracle.com/cd/E19062-01/sun.mgmt.ctr36/819-5418/gaznb/index.html), [mac](https://www.architectryan.com/2012/10/02/add-to-the-path-on-mac-os-x-mountain-lion/).   
 At this point you should be able to run the sam-ba command line tool. You might need to restart the terminal if you changed the PATH.  
-![sam-ba at the command line]({{"assets/images/sam-ba-commandline.png" | relative_url }}).
-3. Download the firmware binary file from the download section on this page.
+![sam-ba at the command line]({{"assets/images/sam-ba-commandline.png" | relative_url }})
+3. Download the firmware binary file from the downloads section on this page.
 4. Plug your baseboard into your computers USB port.
 5. Open the BaseJumper terminal. More details on this [here]({{"docs/terminal/Terminal.html" | relative_url}}).
 6. At the BaseJumper terminal issue the instruction `bootloader`.
@@ -30,7 +30,7 @@ At this point you should be able to run the sam-ba command line tool. You might 
 c:\> sam-ba -p serial:COM5 -d samv71 -a internalflash -c erase
 ```
 10. Change directory to the folder that contains the firmware binary file that you downloaded in step 3. In this example we assume the folder is `c:\downloads`.
-```
+``` console
 c:\> cd downloads
 
 c:\downloads>
