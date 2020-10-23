@@ -15,6 +15,13 @@ Raspberry Pi and BaseJumper baseboards go together like hot pie and whipped crea
 ### Library Installation
 Start by installing the BaseJumper library on your Raspberry pi. The library is available on [github](https://github.com/base-jumper/Platform_RPi). Follow the steps from the README to compile and install the library. A shared library, static library and header files will be installed on the system.
 
+### Pi Configuration
+* Linux serial console on `/dev/serial0` is disabled.
+* Additional UART `/dev/serial2` is enabled.
+* I2C for reading HAT ID `/dev/i2c-0` is enabled.
+* SPI `/dev/spidev0.x` is enabled.
+
+
 ### Template Project
 If you're starting a new project, you might like to start with the BaseJumper application template for linux. It is available on [github](https://github.com/base-jumper/linux-template-cxx). It includes source for a sample application, a simple makefile for building the project, and some configuration files for Visual Studio Code. See the README for further details on how to use it.  
 
