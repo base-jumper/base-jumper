@@ -18,9 +18,9 @@ LEDs have three supported states: on, off or blinking. The rate at which the led
 void set_state(Led::State state)
 ```
 *Sets the state of the lED.*  
-`Led::State_Off` turns the LED off  
-`Led::State_On` turns the LED on  
-`Led::State_Blink` makes the LED blink  
+`Led::State::Off` turns the LED off  
+`Led::State::On` turns the LED on  
+`Led::State::Blink` makes the LED blink  
 
 ``` cpp
 Led::State get_state()
@@ -34,7 +34,7 @@ void set_blink_period(uint16_t period)
 ```
 *Sets the blink period.*  
 `period` is in milliseconds.  
-Note that the LED will not start blinking until `set_state(Led::State_Blink)` is called.
+Note that the LED will not start blinking until `set_state(Led::State::Blink)` is called.
 
 ``` cpp
 uint16_t get_blink_period()
@@ -47,9 +47,9 @@ uint16_t get_blink_period()
 void set_colour(Led::Colour colour)
 ```
 *Sets the colour of the LED.*  
-`Led::Colour_Green` for green  
-`Led::Colour_Red` for red  
-`Led::Colour_Orange` for orange  
+`Led::Colour::Green` for green  
+`Led::Colour::Red` for red  
+`Led::Colour::Orange` for orange  
 
 ``` cpp
 Led::Colour get_colour()
@@ -70,7 +70,7 @@ Led::Handle my_led(0);
 void setup() {  
   basejumper_init();
   my_led.create();  
-  my_led.state_set(Led::State_Blink); 
+  my_led.state_set(Led::State::Blink); 
 }
 
 void loop() {

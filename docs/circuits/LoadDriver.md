@@ -53,11 +53,11 @@ Units are 0.01%. `0` for 0% and `10000` for 100%.
 LoadDriver::Status get_status()
 ```
 *Returns the current status.*  
-`LoadDriver::Status_Ok` if load driver is functioning normally.
-`LoadDriver::Status_OverloadShutdown` indicates an overload was detected and the load driver has been shutdown to protect it.
+`LoadDriver::Status::Ok` if load driver is functioning normally.
+`LoadDriver::Status::OverloadShutdown` indicates an overload was detected and the load driver has been shutdown to protect it.
 
 ``` cpp
 bool reset_status()
 ```
 *Resets the status, to try to recover from a fault condition.*  
-When the load driver status is `LoadDriver::Status_OverloadShutdown` calling this function will reset the status back to `LoadDriver::Status_Ok`. Assuming the output is still enabled (ie. `enabled() == true`), then the driver will attempt to energize the load. 
+When the load driver status is `LoadDriver::Status::OverloadShutdown` calling this function will reset the status back to `LoadDriver::Status::Ok`. Assuming the output is still enabled (ie. `enabled() == true`), then the driver will attempt to energize the load. 

@@ -21,18 +21,18 @@ Some encoders may have outputs with the polarity of one or more of the signals i
 ### Operating Modes
 The encoder circuit supports three different operating modes for measuring position, and one operating mode for measuring speed (4 modes total).
 
-**`Mode_Relative`** is used to measure relative position. No index pulse is used (even if it is present, it will be ignored). Use this mode if you only want to measure relative movement. Alternatively, this mode can also be used if you want to measure absolute position, but *don't* want the index pulse to set your zero position. In this case, the `set_position` function would be called to set the zero position.  
+**`Mode::Relative`** is used to measure relative position. No index pulse is used (even if it is present, it will be ignored). Use this mode if you only want to measure relative movement. Alternatively, this mode can also be used if you want to measure absolute position, but *don't* want the index pulse to set your zero position. In this case, the `set_position` function would be called to set the zero position.  
 
-**`Mode_SingleTurn`** measures rotation over a single turn. It uses an index pulse, and the count is reset every time the index pulse occurs.
+**`Mode::SingleTurn`** measures rotation over a single turn. It uses an index pulse, and the count is reset every time the index pulse occurs.
 
-**`Mode_MultiTurn`** measures rotation over multiple turns. It uses the first index pulse to reset the count. All subsequent index pulses are ignored.
+**`Mode::MultiTurn`** measures rotation over multiple turns. It uses the first index pulse to reset the count. All subsequent index pulses are ignored.
 
-**`Mode_Speed`** measures speed. Phase pulses are counted over a specified interval (set using `set_speed_interval`). At the end of each interval, the number of recorded pulses is scaled to get a speed measurement in pulses per second. The count is reset and the process repeats over the next interval. 
+**`Mode::Speed`** measures speed. Phase pulses are counted over a specified interval (set using `set_speed_interval`). At the end of each interval, the number of recorded pulses is scaled to get a speed measurement in pulses per second. The count is reset and the process repeats over the next interval. 
 
 When using one of the position measurement modes, the position is obtained using `get_position`. In speed measurement mode, speed is obtained using `get_speed`. Calling `get_speed` when in position mode (or visa-versa) will return an invalid value that should not be used.
 
 ### Index Pulse
-`Mode_SingleTurn` and `Mode_MultiTurn` both use an index pulse. Until the first index pulse is seen, the reported position is invalid (it will start counting from zero and reset on the first index pulse). The `seen_index` function can be polled to check if an index pulse has occurred. Once `seen_index` returns `true`, the value from `get_position` is then a valid. 
+`Mode::SingleTurn` and `Mode::MultiTurn` both use an index pulse. Until the first index pulse is seen, the reported position is invalid (it will start counting from zero and reset on the first index pulse). The `seen_index` function can be polled to check if an index pulse has occurred. Once `seen_index` returns `true`, the value from `get_position` is then a valid. 
 
 ### Counts
 `get_position`/`get_speed` report the position/speed in units of counts and counts/second, respectively. Results are returned as a signed integer. Negative values represent rotation in the anti-clockwise direction.
@@ -40,11 +40,11 @@ When using one of the position measurement modes, the position is obtained using
 ### Pulse Multiplier
 A multiplier can be applied to the number of counts that are reported to effectively increase the resolution of the encoder. The multiplier options are described below.
 
-**`Multiplier_1x`**: Counts match the number of pulses-per-revolution (ppr) on the encoder label. For example, a 1000ppr encoder will generate 1000 counts per revolution.
+**`Multiplier::X1`**: Counts match the number of pulses-per-revolution (ppr) on the encoder label. For example, a 1000ppr encoder will generate 1000 counts per revolution.
 
-**`Multiplier_2x`**: Counts are doubled. For example a 1000ppr encoder will generate 2000 counts per revolution. This is equivalent to counting both rising and falling edges of a single phase signal. 
+**`Multiplier::X2`**: Counts are doubled. For example a 1000ppr encoder will generate 2000 counts per revolution. This is equivalent to counting both rising and falling edges of a single phase signal. 
 
-**`Multiplier_4x`**: Counts are quadrupled. For example a 1000ppr encoder will generate 4000 counts per revolution. This is equivalent to counting both rising and falling edges of both phase signals. 
+**`Multiplier::X4`**: Counts are quadrupled. For example a 1000ppr encoder will generate 4000 counts per revolution. This is equivalent to counting both rising and falling edges of both phase signals. 
 
 There is no performance penalty in terms of software overheads, interrupt loading, etc associated with selecting the highest multiplier. 
 
@@ -105,10 +105,10 @@ void set_mode(Encoder::Mode mode)
 ```
 *Sets the operating mode.*  
 Supported operating modes are;  
-* `Encoder::Mode_Relative` for relative position measurements  
-* `Encoder::Mode_SingleTurn` for absolute position measurements over a single turn  
-* `Encoder::Mode_MultiTurn` for absolute position measurements over multiple turns  
-* `Encoder::Mode_Speed` for speed measurements  
+* `Encoder::Mode::Relative` for relative position measurements  
+* `Encoder::Mode::SingleTurn` for absolute position measurements over a single turn  
+* `Encoder::Mode::MultiTurn` for absolute position measurements over multiple turns  
+* `Encoder::Mode::Speed` for speed measurements  
 
 This setting is retained between power cycles.
 
@@ -123,9 +123,9 @@ void set_multiplier(Encoder::Multiplier mult)
 ```
 *Sets pulse count multiplier.*  
 Supported multipliers are;  
-* `Encoder::Multiplier_1x` counts per turn matches encoder ppr spec
-* `Encoder::Multiplier_2x` counts per turn is double encoder ppr spec
-* `Encoder::Multiplier_4x` counts per turn is quadruple encoder ppr spec  
+* `Encoder::Multiplier::X1` counts per turn matches encoder ppr spec
+* `Encoder::Multiplier::X2` counts per turn is double encoder ppr spec
+* `Encoder::Multiplier::X4` counts per turn is quadruple encoder ppr spec  
 
 This setting is retained between power cycles.
 ```cpp
@@ -163,7 +163,7 @@ void set_position(int32_t counts)
 ```
 *Sets the position.*  
 Valid only when using one of the position measurement modes. Calling this function will apply an internal offset to the current position measurement to produce the desired position specified by `counts`.  
-For `Mode_SingleTurn` or `Mode_MultiTurn` it is advisable to wait until `seen_index` return true before configuring the offset. For `Mode_Relative` this function can be called at any time.
+For `Mode::SingleTurn` or `Mode::MultiTurn` it is advisable to wait until `seen_index` return true before configuring the offset. For `Mode::Relative` this function can be called at any time.
 
 ```cpp
 bool seen_index()
@@ -180,4 +180,4 @@ void reset_seen_index()
 int32_t get_speed()
 ```
 *Get speed measurement.*  
-Valid only when mode is set to `Mode_Speed`. Result is in counts per second, where counts may be a multiple of the encoders pulses per revolution (ppr). Positive values indicate rotation in the clockwise direction. Negative values indicate rotation in the counter-clockwise direction.
+Valid only when mode is set to `Mode::Speed`. Result is in counts per second, where counts may be a multiple of the encoders pulses per revolution (ppr). Positive values indicate rotation in the clockwise direction. Negative values indicate rotation in the counter-clockwise direction.

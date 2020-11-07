@@ -46,11 +46,11 @@ void loop()
     /* Turn led on when button is pressed and off when button is released */
     if (button.get_state())
     {
-      led.set_state(Led::State_On);
+      led.set_state(Led::State::On);
     }
     else
     {
-      led.set_state(Led::State_Off);
+      led.set_state(Led::State::Off);
     }
     delay(50);
 }
@@ -146,18 +146,18 @@ void loop()
     /* Turn led on when button is pressed and off when button is released */
     if (button.get_state())          // circuit instruction #1
     {
-      led.set_state(Led::State_On);  // circuit instruction #2
+      led.set_state(Led::State::On);  // circuit instruction #2
     }
     else
     {
-      led.set_state(Led::State_Off); // circuit instruction #3
+      led.set_state(Led::State::Off); // circuit instruction #3
     }
     delay(50);
 }
 ```
 The first is `button.get_state()`. This issues a command to the `DigitalInput` circuit instance that is identified by the handle `button`. The command is `get_state` which returns the current state of the input as a boolean value.
 
-`led.set_state(Led::State_On)` is an instruction for a `Led` circuit which accepts the desired state (i.e. on, off or blinking) as an argument. When custom types such as this state enumeration are used, they are always defined inside the circuit namespace, so the argument will always have something like `Led::` at the beginning (same as the handle class!).
+`led.set_state(Led::State::On)` is an instruction for a `Led` circuit which accepts the desired state (i.e. on, off or blinking) as an argument. When custom types such as this state enumeration are used, they are always defined inside the circuit namespace, so the argument will always have something like `Led::` at the beginning (same as the handle class!).
 
 In this example we have only encountered two circuit types and a few instructions. There are many more, and you can read about them in the [Circuits]({{"docs/circuits/Circuits.html" | relative_url}}) section.
 

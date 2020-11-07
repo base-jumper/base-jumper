@@ -41,8 +41,8 @@ Base boards fitted with a GPS receiver have a coin cell holder that takes a CR20
 Gps::Fix get_fix()
 ```
 *Returns current fix status*  
-`Gps::Fix_NoFix`, `Gps::Fix_DeadReckoning`, `Gps::Fix_2D`, `Gps::Fix_3D`, `Gps::Fix_GnssPlusDeadReckoning` or `Gps::Fix_TimeOnly`.  
-If everything is working OK you should get `Fix_3D`, but it can take a few minutes after power up to reach this state.
+`Gps::Fix::NoFix`, `Gps::Fix::DeadReckoning`, `Gps::Fix::Fix2D`, `Gps::Fix::Fix3D`, `Gps::Fix::GnssPlusDeadReckoning` or `Gps::Fix::TimeOnly`.  
+If everything is working OK you should get `Fix3D`, but it can take a few minutes after power up to reach this state.
 
 ### Position
 

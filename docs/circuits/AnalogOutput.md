@@ -52,8 +52,8 @@ Units are volts. The voltage is measured at the output using an ADC. Low-pass fi
 Status get_status()
 ```
 *Returns the current status.*  
-`AnalogOutput::Status_Ok` indicates output is operating normally.   
-`AnalogOutput::Status_OverloadShutdown` indicates an overload was detected and the output has been shutdown.
+`AnalogOutput::Status::Ok` indicates output is operating normally.   
+`AnalogOutput::Status::OverloadShutdown` indicates an overload was detected and the output has been shutdown.
 
 ``` cpp
 void reset_status()

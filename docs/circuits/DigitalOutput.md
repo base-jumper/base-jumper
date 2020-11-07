@@ -16,16 +16,16 @@ Digital outputs have both hardware and firmware measures to protect the outputs 
 ## API
 
 ```cpp
-void set_state(DigitalOutput::Tristate state)
+void set_state(DigitalOutput::State state)
 ```
 *Sets the state of the digital output.*  
 `state` is an enum with the following options;  
-* `DigitalOutput::State_HighZ` for high-impedance
-* `DigitalOutput::State_High` to drive high
-* `DigitalOutput::State_Low` to drive low
+* `DigitalOutput::State::HighZ` for high-impedance
+* `DigitalOutput::State::High` to drive high
+* `DigitalOutput::State::Low` to drive low
 
 ```cpp
-DigitalOutput::Tristate get_state()
+DigitalOutput::State get_state()
 ```
 *Gets the current state of the digital output.*  
 See `set_state` for the possible states.
@@ -34,18 +34,18 @@ See `set_state` for the possible states.
 void toggle_state()
 ```
 *Toggles the state of the output.*  
-If the state is `State_HighZ` (high-impedance) it remains unchanged. Otherwise, `State_High` is flipped to `State_Low` and visa-versa.
+If the state is `State::HighZ` (high-impedance) it remains unchanged. Otherwise, `State::High` is flipped to `State::Low` and visa-versa.
 
 ```cpp
 DigitalOutput::Status get_status()
 ```
 *Gets the status of the output.*  
 Returns a `Status` enum with the following possible values;
-* `DigitalOutput::Status_Ok` for normal operation
-* `DigitalOutput::Status_OverloadShutdown` if output has been disabled (changed to `State_HighZ`) due to an overload condition.
+* `DigitalOutput::Status::Ok` for normal operation
+* `DigitalOutput::Status::OverloadShutdown` if output has been disabled (changed to `State::HighZ`) due to an overload condition.
 
 ```cpp
 void reset_status()
 ```
 *Resets status.*  
-If the status was previously `Status_OverloadShutdown`, it will be reset to `Status_Ok` and the output will be re-enabled. Operation may resume as normal if the condition that triggered the overload condition has since been cleared. Otherwise the overload protection will again be triggered and the status will return to `Status_OverloadShutdown`.
+If the status was previously `Status::OverloadShutdown`, it will be reset to `Status::Ok` and the output will be re-enabled. Operation may resume as normal if the condition that triggered the overload condition has since been cleared. Otherwise the overload protection will again be triggered and the status will return to `Status::OverloadShutdown`.

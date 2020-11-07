@@ -73,7 +73,7 @@ void setup()
 {
     basejumper_init();
     can.create();
-    can.start(CanBus::Baud_125K, false); // connects to the can bus with baud 125Kb/s and CAN FD disabled
+    can.start(CanBus::Baud::_125K, false); // connects to the can bus with baud 125Kb/s and CAN FD disabled
 }
 ```
 
@@ -209,11 +209,11 @@ void start(CanBus::Baud baud, bool use_fd)
 ```
 *Brings the CAN bus online.*  
 `baud` specifies the bus baud rate. 125 kbit/s & 250 kbits/s are most commonly used. The maximum speed for CAN 2.0 is 1MB/s. Speeds above that are for CANFD only. Supported bauds are;  
-`CanBus::Baud_125K`  
-`CanBus::Baud_250K`  
-`CanBus::Baud_500K`  
-`CanBus::Baud_1M`  
-`CanBus::Baud_2M`  
+`CanBus::Baud::_125K`  
+`CanBus::Baud::_250K`  
+`CanBus::Baud::_500K`  
+`CanBus::Baud::_1M`  
+`CanBus::Baud::_2M`  
 
 `use_fd` specifies whether support for CANFD should be enabled.
 
@@ -275,17 +275,17 @@ CanBus::Status get_status()
 
 | Value | Description |
 | --- | --- |
-| `CanBus::Status_Ok` | Indicates there have been no errors |
-| `CanBus::Status_RxOverflow` | Receive buffer for one or more of the filters has overflowed |
-| `CanBus::Status_TxOverflow` | Transmit buffer has overflowed |
+| `CanBus::Status::Ok` | Indicates there have been no errors |
+| `CanBus::Status::RxOverflow` | Receive buffer for one or more of the filters has overflowed |
+| `CanBus::Status::TxOverflow` | Transmit buffer has overflowed |
 
-The status is latched. It will only return to `Status_Ok` after `reset_status` is called.
+The status is latched. It will only return to `Status::Ok` after `reset_status` is called.
 
 ``` cpp 
 void reset_status()
 ```
 *Clears the status.*  
-Status is returned to `Status_Ok`.
+Status is returned to `Status::Ok`.
 
 ### direct control
 

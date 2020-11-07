@@ -31,8 +31,8 @@ bool enabled()
 Supply::Status get_status()
 ```
 *Gets the status of the supply.*  
-`Supply::Status_Ok` if supply is functioning normally.  
-`Supply::Status_OverloadShutdown` indicates an overload fault occured and the supply has shutdown to protect itself.  
+`Supply::Status::Ok` if supply is functioning normally.  
+`Supply::Status::OverloadShutdown` indicates an overload fault occured and the supply has shutdown to protect itself.  
 
 ``` cpp
 void reset_status()
