@@ -35,14 +35,15 @@ Platforms that have a UART will already have the UART pins connected to the tran
 ## API 
 ### start
 ``` cpp
-void start(uint16_t baud, Serial::Config config)
+void start(uint16_t baud = 9600, Serial::Config config = Serial::Config::_8N1)
 ```
 *Starts the serial port.*  
 `baud` specifies the baud rate. 9600 is a safe default. Other common baud rates are  1200, 2400, 4800, 19200, 38400, 57600, and 115200.  
-`config` specifies the number of data bits (5-8), parity bit (N for none, E for even, O for odd) and the number of stop bits (1-2). `Serial::Config_8N1` would give 8 data, no parity and 1 stop bit.
+`config` specifies the number of data bits (5-8), parity bit (N for none, E for even, O for odd) and the number of stop bits (1-2). `Serial::Config::_8N1` would give 8 data, no parity and 1 stop bit.  
+If no arguments are specified, `9600` & `SerialPort::Config::_8N1` are used by default. 
 ``` cpp
 /* Example */
-my_serial.start(9600, Serial::Config_8N1); // 9600 bits/s, 8data bits, no parity bit, 1 stop bit
+my_serial.start(9600, Serial::Config::_8N1); // 9600 bits/s, 8data bits, no parity bit, 1 stop bit
 ```
 
 ### available

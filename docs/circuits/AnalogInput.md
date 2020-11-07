@@ -70,8 +70,8 @@ Result will be filtered if filtering is enabled.
 void set_filt(AnanlogInput::FilterType filter_type)
 ```
 *Add or remove a filter.*  
-`AnalogInput::FilterType_None` for no filtering.  
-`AnalogInput::FilterType_Lowpass` for IIR low-pass filter.
+`AnalogInput::FilterType::None` for no filtering.  
+`AnalogInput::FilterType::Lowpass` for IIR low-pass filter.
 
 ```cpp
 FilterType get_filt()
@@ -86,7 +86,7 @@ void set_filt_coeff(uint8_t index, float val)
 `index` specifies which filter coefficient to set. Coefficients are numbered starting from `0`.  
 `val` is the new value for the filter coefficient.  
 
-`AnalogInput::FilterType_Lowpass` has a single coefficient (`index` of 0). Reducing this coefficient lowers the cut-off frequency.
+`AnalogInput::FilterType::Lowpass` has a single coefficient (`index` of 0). Reducing this coefficient lowers the cut-off frequency.
 
 ``` cpp
 float get_filt_coeff(uint8_t index)
