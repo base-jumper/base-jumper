@@ -39,7 +39,7 @@ The circuit contains a low pass RC filter. The filter cut-off frequency can be a
 
 ### read state
 ``` cpp
-bool get_level()
+bool get_state()
 ```
 *Returns the state of the digital input.*
 

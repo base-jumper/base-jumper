@@ -67,7 +67,7 @@ Result will be filtered if filtering is enabled.
 
 ### filtering
 ``` cpp
-void set_filt(AnanlogInput::FilterType filter_type)
+void set_filt(AnalogInput::FilterType filter_type)
 ```
 *Add or remove a filter.*  
 `AnalogInput::FilterType::None` for no filtering.  
@@ -100,7 +100,7 @@ When requesting an `index` that exceeds the supported number of coefficients for
 ``` cpp
 void set_gain(float val)
 ```
-*Configures the circuit gain.*
+*Configures the circuit gain.*  
 The circuit gain is used for back-calculating the analog input pin voltage (as reported by `get_voltage`) from the ADC measurement. It is only neccessary to configure the gain if adjustments are made to the signal conditioning hardware of the analog input circuit on the PCB. The gain paramter is kept in non-volatile storage, so it is only neccessary to call this function once after reconfiguring the hardware. The updated gain will be used in all subsequent computations (even after a power cycle).
 
 ``` cpp
