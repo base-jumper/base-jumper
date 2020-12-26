@@ -50,11 +50,11 @@ void loop()
     /* Turn led on when button is pressed and off when button is released */
     if (button.get_state())
     {
-      led.set_state(Led::State_On);
+      led.set_state(Led::State::On);
     }
     else
     {
-      led.set_state(Led::State_Off);
+      led.set_state(Led::State::Off);
     }
     delay(50);
 }
