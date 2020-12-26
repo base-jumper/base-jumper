@@ -1,7 +1,7 @@
 ---
 layout: page
 title: Using VSCode over SSH
-parent: Circuits
+parent: Tips
 ---
 
 # Using VSCode over SSH
