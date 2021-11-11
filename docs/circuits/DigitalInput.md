@@ -15,6 +15,11 @@ When a mechanical switch closes, the contacts will typically bounce multiple tim
 
 The debouncing algorithm waits for a transition to occur on the input. When a transition is detected the algorithm waits for a specified *settling time* for the voltage to stabilize. The settling time should be set to the longest expected switch bouncing duration. Once the settling time is up, the input is sampled 3 times successively at 10ms intervals to determine the new switch state. If the measurements are inconsistent, then the process repeats until a stable measurement is obtained.
 
+## Programmable Biasing 
+Biasing determines the state of the input when there is no signal driving it (i.e. the input is left floating). If biasing is set to `High` a pull-up resistor will be enabled to give a default state of `true`. Similarly if biasing is set to `Low` a pull-down resistor is enabled to give a default state of `false`. With biasing disabled the input will be left floating and will not have a well defined state until it is driven by a signal. 
+
+Biasing should be set to `High` if the signal is coming from a sensors with open-collector output, open-drain output or a switch that connects to ground. Set biasing to `Low` if the signal is coming from an switch that connects to power.
+
 ## Hardware Customization
 This section describes the customizations that can be made to the base board's hardware. Only general information is provided here. Component designators and board assembly drawings can be found on the [boards]({{"docs/boards/index.html" | relative_url}}) page for a specific base board.
 
@@ -36,6 +41,23 @@ The circuit contains a low pass RC filter. The filter cut-off frequency can be a
 ---
 
 ## API
+
+### configuration
+``` cpp
+void set_bias(DigitalInput::Bias bias)
+```
+*Sets the biasing.*  
+`bias` is an enum with the following options;  
+* `DigitalInput::Bias::High` to enable pull-up resistor giving a default state of `true`
+* `DigitalInput::Bias::Low` to enable the pull-down resistor giving a default state of `false`
+* `DigitalInput::Bias::None` to leave the input floating giving an undefined default state
+
+```cpp
+DigitalInput::Bias get_bias()
+```
+*Gets the current bias setting.*  
+See `set_bias` for the possible options.
+
 
 ### read state
 ``` cpp
