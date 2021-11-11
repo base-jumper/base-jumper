@@ -42,7 +42,6 @@ The circuit contains a low pass RC filter. The filter cut-off frequency can be a
 
 ## API
 
-### configuration
 ``` cpp
 void set_bias(DigitalInput::Bias bias)
 ```
@@ -58,8 +57,6 @@ DigitalInput::Bias get_bias()
 *Gets the current bias setting.*  
 See `set_bias` for the possible options.
 
-
-### read state
 ``` cpp
 bool get_state()
 ```
