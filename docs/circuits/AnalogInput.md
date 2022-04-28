@@ -13,10 +13,10 @@ Many sensors have the property that their output voltage is proportional to thei
 
 The `AnalogInput`API provides an option for reading the sensor output as a ratio of the supply voltage. It assumes the sensor is powered from the base boards 5V external supply.
 
-### Circuit Gain
-The circuit hardware contains signal conditioning stages which can be configured to apply a gain to the signal. There is a resistor network which can be configured as a resistor-divider with a gain of less than 1. There is also a non-inverting op-amp circuit which can provide a gain of over 1. The `Boards` page of each base board specifies the default gain of its `AnalogInput` circuit. If required, the hardware can be modified to adjust the gain to suit a particular application. 
+### Circuit Gain & Offset
+The circuit hardware contains signal conditioning stages which can be configured to apply a gain and sometimes offset to the signal. There is a resistor network which can be configured as a resistor-divider with a gain of less than 1. There is also a non-inverting op-amp circuit which can provide a gain of over 1. The `Boards` page of each base board specifies the default gain & offset of its `AnalogInput` circuit. If required, the hardware can be modified to adjust the gain to suit a particular application. 
 
-The API function `get_voltage` is used to read the input voltage. It reports the voltage at the output of the sensor, as measured at the connector pin of the base board. This function accounts for any gain that is applied to the input in the signal condition circuits. If any adjustments are made to the gain, the baseboard should be updated with the new gain setting using the `set_gain` function.
+The API function `get_voltage` is used to read the input voltage. It reports the voltage at the output of the sensor, as measured at the connector pin of the base board. This function accounts for any gain and/or offset that is applied to the input in the signal condition circuits. If any adjustments are made to the hardware, the baseboard should be updated with the new gain and offset settings using the `set_gain` and `set_offset` functions.
 
 ### Filtering
 `AnalogInput` circuits provide two layers of filtering. First, there is the signal conditioning circuitry on the board. The default circuit population provides a first-order low-pass RC filter. Second, filtering can be applied in software by the `AnalogInput` firmware running on the base board. To enable software filtering, see the filtering API below.
@@ -95,15 +95,26 @@ float get_filt_coeff(uint8_t index)
 `index` specifies which filter coefficient to return. Coefficients are number starting from `0`.  
 When requesting an `index` that exceeds the supported number of coefficients for the active filter, a result of 0.0 will be returned. 
 
-### gain
+### gain and offset
 
 ``` cpp
 void set_gain(float val)
 ```
 *Configures the circuit gain.*  
-The circuit gain is used for back-calculating the analog input pin voltage (as reported by `get_voltage`) from the ADC measurement. It is only neccessary to configure the gain if adjustments are made to the signal conditioning hardware of the analog input circuit on the PCB. The gain paramter is kept in non-volatile storage, so it is only neccessary to call this function once after reconfiguring the hardware. The updated gain will be used in all subsequent computations (even after a power cycle).
+The circuit gain is used for back-calculating the analog input pin voltage (as reported by `get_voltage`) from the ADC measurement. It is only necessary to configure the gain if adjustments are made to the signal conditioning hardware of the analog input circuit on the PCB. The gain parameter is kept in non-volatile storage, so it is only necessary to call this function once after reconfiguring the hardware. The updated gain will be used in all subsequent computations (even after a power cycle).
 
 ``` cpp
 float get_gain()
+```
+*Returns the current circuit gain setting.*
+
+``` cpp
+void set_offset(float val)
+```
+*Configures the circuit offset.*  
+The circuit offset is used for back-calculating the analog input pin voltage (as reported by `get_voltage`) from the ADC measurement. It is only necessary to configure the offset if adjustments are made to the signal conditioning hardware of the analog input circuit on the PCB. The offset parameter is kept in non-volatile storage, so it is only necessary to call this function once after reconfiguring the hardware. The updated offset will be used in all subsequent computations (even after a power cycle).
+
+``` cpp
+float get_offset()
 ```
 *Returns the current circuit gain setting.*
