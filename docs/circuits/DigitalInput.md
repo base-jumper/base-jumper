@@ -8,7 +8,16 @@ parent: Circuits
 
 `DigitalInput` circuits are useful for monitoring switches and sensors with digital outputs such as proximity sensors.
 
-### Debouncing
+## Reading the Input
+There are two ways to read the input. The simplest is the `get_state()` function. This returns the instantaneous state of the input. `true` represents a high signal and `false` represents low.  
+
+The second option is `get_edges()`. This function returns not only the current state of the input but also the number of edges (or state transitions) that have occurred. By monitoring the returned edge count, the user application can ensure that it never misses any events - even if they are very fast. By contrast, if the `get_state()` function was used to capture fast events then the application would need to call this function at very fast interval which could put considerable load on the system. Therefore, `get_edges()` is the preferred option in cases where the input signal can change quickly and the application must respond to *every* change.
+
+The returned edge count includes both rising (low to high) and falling (high to low) edges. By considering the current state it is easy to calculate how many of each edge type (rising and falling) have occurred. Calling `get_edges(true)` (ie. argument set to `true`) will *reset* the edge count after it is returned. Consecutive calls to `get_edges(true)` will then give the number of edges between calls. Otherwise the edge count will accumulate, and potentially rollover back to zero if it reaches 2^32.
+
+Changing the circuit configuration (such as changing the biasing) may result in the edge count incrementing - even if the input signal itself hasn't changed. Best practice is to configure the `DigitalInput` as desired (including biasing), wait a short amount of time for the voltages to settle, clear the edge count, then start reading the edge count. To clear the edge count call `get_edges(true)`. The returned data can simply be discarded. 
+
+## Debouncing
 When a mechanical switch closes, the contacts will typically bounce multiple times before settling in the closed position. This phenomenon is known as [switch bounce](https://www.allaboutcircuits.com/technical-articles/switch-bounce-how-to-deal-with-it/). Signal conditioning is required to filter out the spurious transitions that can result from switch bounce. 
 
 `DigitalInput` circuits have a hardware low-pass filter on-board. However, since the same input may be used for other high-speed inputs such as frequency measurements or an encoder interface, by default the filter cut-off is set quite high. `DigitalInput` drivers provide additional switch debouncing in software, which should be enabled when interfacing with mechanical switches. For interfacing with sensors that do not have mechanical contacts (hall sensors, inductive sensors, etc.) debouncing can be disabled to give a faster response.
@@ -38,6 +47,8 @@ The circuit contains a low pass RC filter. The filter cut-off frequency can be a
 | --- | --- | --- | --- | 
 | Cfilt | Sets filtering | 100pF | 1nF |
 
+
+
 ---
 
 ## API
@@ -61,6 +72,20 @@ See `set_bias` for the possible options.
 bool get_state()
 ```
 *Returns the state of the digital input.*
+
+``` cpp
+EdgeData get_edges(bool reset)
+```
+*Returns the current state of the input, plus the number of edge transitions that have been counted.*   
+The data is packed into a struct with the following fields.
+| Type | Name | Description |
+| --- | --- | --- |
+| `uint32_t` | `edge_count` | Number of edges counted
+| `bool` | `current_state` | The current state of the input
+`edge_count` includes both rising and falling edges.
+
+The argument `reset` controls whether edge_counts are cleared after they are returned. Set to `true` to clear, or `false` to retain and accumulate.
+
 
 ``` cpp
 void set_debounce(bool)
