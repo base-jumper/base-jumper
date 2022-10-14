@@ -10,8 +10,7 @@ parent: Boards
 This section provides specifications for the circuits available on the base board. These specifications are for the default population, and may not apply if any customizations have been made. For general information on how to use a particular circuit, refer to the *circuit docs* linked beneath the table.
 
 ### Connector Specs
-* Main connector set: [Molex MX150 (20+12)]({ "docs/Connectors.html#molex-mx150-2012 | relative_url}) (IP67)
-* GPS antenna: SMA female
+
 
 ### Analog Input Specs
 
@@ -50,13 +49,57 @@ This sections provides details of component designators and the default populati
 
 ## Pin Outs
 
-**Connector A**  
+**Connector X**  
 
-| Pin # | Function 1 | Function 2 |
-| --- | --- | --- |
-| x | AnalogInput 0 | AnalogOutput 0 |
-| y | AnalogInput 1 | AnalogOutput 1 |
-| z | Supply 0 | - |
+| Pin # | Function | Pin # | Function |
+| --- | --- | --- | --- |
+| 1 | Ground | 2 | LoadDriver(0) |
+| 3 | Ground | 4 | LoadDriver(1) |
+| 5 | Ground | 6 | LoadDriver(2) |
+| 7 | Ground | 8 | LoadDriver(3) |
+| 9 | Ground | 10 | Ground |
+| 11 | Power | 12 | Power |
+| 13 | Expansion 3* | 14 | Expansion 0* |
+| 15 | Expansion 2*| 16 | Expansion 1* |  
+
+\* Pin used by expansion board (if fitted)
+
+**Connector Y**
+
+| Pin # | Function | Pin # | Function |
+| --- | --- | --- | --- |
+| 1 | SerialPort(0) RS485B | 2 | SerialPort(0) RS485A |
+| 3 | Ground | 4 | Ground |
+| 5 | CanBus(0) CANL | 6 | CanBus(0) CANH |
+| 7 | Ground | 8 | Ground |
+| 9 | CanBus(1) CANL | 10 | CanBus(1) CANH |
+| 11 | Supply(1) 5V | 12 | Ground |
+| 13 | Ground | 14 | AnalogInput(0) or AnalogOutput(0) |
+| 15 | Supply(1) 5V | 16 | Ground |
+| 17 | Ground | 18 | AnalogInput(1) or AnalogOutput(1) |
+| 19 | Supply(1) 5V | 20 | Ground |
+| 21 | Ground | 22 | AnalogInput(2) or AnalogOutput(2) |
+| 23 | Supply(1) 5V | 24 | Ground |
+| 25 | Ground | 26 | AnalogInput(3) or AnalogOutput(3) |
+| 27 | Ground | 28 | Ignition |
+
+**Connector Z**
+| Pin # | Function | Pin # | Function |
+| --- | --- | --- | --- |
+| 1 | Ground | 2 | DigitalOutput(0) |
+| 3 | Supply(0) 15V | 4 | Supply(1) 5V |
+| 5 | Ground | 6 | DigitalOutput(2) |
+| 7 | Supply(0) 15V | 8 | Supply(1) 5V |
+| 9 | Ground | 10 | DigitalOutput(3) |
+| 11 | Supply(0) 15V | 12 | Supply(1) 5V |
+| 13 | Ground | 14 | DigitalOutput(1) |
+| 15 | Supply(0) 15V | 16 | Supply(1) 5V |
+| 17 | Ground | 18 | DigitalInput(0) |
+| 19 | Supply(0) 15V | 20 | Supply(1) 5V |
+| 21 | Ground | 22 | DigitalInput(1) |
+| 23 | Supply(0) 15V | 24 | Supply(1) 5V |
+| 25 | Ground | 26 | DigitalInput(2) |
+| 27 | Ground | 28 | DigitalInput(3) |
 
 ## PCB Assembly Drawing
 
