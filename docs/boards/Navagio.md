@@ -84,6 +84,7 @@ This sections provides details of component designators and the default populati
 | 27 | Ground | 28 | Ignition |
 
 **Connector Z**
+
 | Pin # | Function | Pin # | Function |
 | --- | --- | --- | --- |
 | 1 | Ground | 2 | DigitalOutput(0) |
